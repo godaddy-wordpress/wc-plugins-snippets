@@ -24,7 +24,7 @@ We also welcome new snippets! Please first check to see if a similar snippet exi
  
  ```
 function sv_wc_{plugin_name}_my_function() {
-	// the function code
+   // the function code
 }
 ```
 
