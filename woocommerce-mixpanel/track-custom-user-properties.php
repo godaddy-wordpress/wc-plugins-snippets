@@ -38,10 +38,10 @@ if ( ! function_exists( 'sv_wc_mixpanel_renewed_subscription' ) ) {
 	 * This example illustrates how to add/update the "Last Subscription Billing Amount"
 	 * user property when a subscription is renewed.
 	 *
-	 * @param \WC_Order  $renewal_order the checkbox field html
-	 * @param \WC_Order  $original_order the payment form object
-	 * @param int        $product_id the payment form object
-	 * @param \WC_Order  $new_order_role the payment form object
+	 * @param \WC_Order  $renewal_order
+	 * @param \WC_Order  $original_order
+	 * @param int        $product_id the
+	 * @param \WC_Order  $new_order_role
 	 */
 	function sv_wc_mixpanel_renewed_subscription( $renewal_order, $original_order, $product_id, $new_order_role ) {
 
