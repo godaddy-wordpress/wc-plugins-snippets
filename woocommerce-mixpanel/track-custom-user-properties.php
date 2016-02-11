@@ -8,10 +8,6 @@ if ( ! function_exists( 'sv_wc_mixpanel_track_custom_user_property' ) ) {
 	 * * Placeholders:
 	 * * `hook_to_trigger_event_on`: replace with the hook you would like this event to trigger on; eg: `woocommerce_add_to_cart`
 	 * * $properties array: replace with an array of custom property names and values in the `'Property Name' => 'Property Value'` format
-	 *
-	 * @param string $html the checkbox field html
-	 * @param object $form the payment form object
-	 * @return string $html the updated checkbox field html
 	 */
 	function sv_wc_mixpanel_track_custom_user_property() {
 
