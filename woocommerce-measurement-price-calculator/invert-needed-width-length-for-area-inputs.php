@@ -10,15 +10,12 @@
  */
 function sv_wc_swap_mpc_rows() {
 
-	// Bail if we're not on a product page
+	// bail if we're not on a product page
 	if ( ! is_product() ) {
 		return;
 	}
 
-	?>
-	<script type="text/javascript">
-
-		jQuery( document ).ready( function($) {
+	wc_enqueue_js( '
 
 			var  $price_calculator = $( "#price_calculator" );
 
@@ -35,11 +32,8 @@ function sv_wc_swap_mpc_rows() {
 					$width_tr.after( $length_tr );
 				}
 			}
-		} )
 
-	</script>
-	<?php
-	
+	' );
 }
 
-add_action( 'wp_print_footer_scripts', 'sv_wc_swap_mpc_rows' );
+add_action( 'wp_enqueue_scripts', 'sv_wc_swap_mpc_rows' );
