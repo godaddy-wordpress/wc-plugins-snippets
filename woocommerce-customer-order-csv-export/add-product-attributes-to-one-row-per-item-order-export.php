@@ -1,4 +1,4 @@
-<?php
+<?php // only copy this line if needed
 /**
  * Adds product attributes to the one row per item order export
  */
