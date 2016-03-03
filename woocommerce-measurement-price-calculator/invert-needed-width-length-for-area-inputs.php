@@ -35,7 +35,7 @@ function sv_wc_swap_mpc_rows() {
 					$width_tr.after( $length_tr );
 				}
 			}
-        } )
+		} )
 
 	</script>
 	<?php
