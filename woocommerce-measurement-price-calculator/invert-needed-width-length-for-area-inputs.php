@@ -16,7 +16,7 @@ function sv_wc_swap_mpc_rows() {
 	}
 
 	wc_enqueue_js( '
-
+	
 			var  $price_calculator = $( "#price_calculator" );
 
 			if ( $price_calculator ) {
