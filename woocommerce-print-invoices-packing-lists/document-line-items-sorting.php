@@ -1,6 +1,6 @@
 <?php // only copy this line if needed
 /**
- * Change the order items sort order in documents
+ * Change the order items sort order in documents in v3.0.2+
  *
  * @param string $sort_order_items_key The column key (such as 'sku', 'price', 'weight', etc.) to sort order items by
  * @param int $order_id The WC_Order id
