@@ -24,7 +24,7 @@ function sv_wc_pip_add_order_delivery_shipping( $shipping, $document_type, $orde
 		$delivery_date_i18n = wc_od_localize_date( $delivery_date );
 		$shipping .= '<p>We will try our best to deliver your order on: ' . $delivery_date_i18n . '</p>';
 	}
-	
+
 	return $shipping;
 }
-add_filter( 'wc_pip_shipping_method', 'sv_wc_pip_add_order_delivery_shipping', 10, 3 );
+add_filter( 'wc_pip_document_shipping_method', 'sv_wc_pip_add_order_delivery_shipping', 10, 3 );
