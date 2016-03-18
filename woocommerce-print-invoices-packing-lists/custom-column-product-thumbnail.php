@@ -4,8 +4,6 @@
  * Filter the document table headers to add a product thumbnail header
  *
  * @param array $table_headers Table column headers
- * @param int $order_id WC_Order id
- * @param string $document_type WC_PIP_Document type
  * @return array The updated table column headers
  */
 function sv_wc_pip_document_table_headers_product_thumbnail( $table_headers ) {
@@ -26,10 +24,9 @@ add_filter( 'wc_pip_document_table_headers', 'sv_wc_pip_document_table_headers_p
  * @param string $item_id Item id
  * @param array $item Item data
  * @param \WC_Product $product Product object
- * @param \WC_Order $order Order object
  * @return array The filtered table row cells.
  */
-function sv_wc_pip_document_table_row_cells_product_thumbnail( $table_row_cells, $document_type, $item_id, $item, $product, $order ) {
+function sv_wc_pip_document_table_row_cells_product_thumbnail( $table_row_cells, $document_type, $item_id, $item, $product ) {
 
 	// get the product's or variation's thumbnail 'shop_thumbnail' size; we will use CSS to set the width
 	$thumbnail_content = array( 'product_thumbnail' => $product->get_image() );
@@ -37,7 +34,7 @@ function sv_wc_pip_document_table_row_cells_product_thumbnail( $table_row_cells,
 	// add product thumnail column as the first column
 	return array_merge( $thumbnail_content, $table_row_cells );
 }
-add_filter( 'wc_pip_document_table_row_cells', 'sv_wc_pip_document_table_row_cells_product_thumbnail', 10, 6 );
+add_filter( 'wc_pip_document_table_row_cells', 'sv_wc_pip_document_table_row_cells_product_thumbnail', 10, 5 );
 
 
 /**
