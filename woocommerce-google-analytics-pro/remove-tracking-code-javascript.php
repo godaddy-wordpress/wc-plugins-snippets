@@ -14,6 +14,10 @@ function sv_wc_google_analytics_pro_remove_tracking_code() {
 
 	remove_action( 'wp_head',    array( wc_google_analytics_pro()->get_integration(), 'ga_tracking_code' ), 9 );
 	remove_action( 'login_head', array( wc_google_analytics_pro()->get_integration(), 'ga_tracking_code' ), 9 );
+
+	// remove pageviews
+	// uncomment the following line if your Google Analytics plugin tracks pageviews
+	// remove_action( 'wp_head', array( wc_google_analytics_pro()->get_integration(), 'pageview' ) );
 }
 
 add_action( 'init', 'sv_wc_google_analytics_pro_remove_tracking_code' );
