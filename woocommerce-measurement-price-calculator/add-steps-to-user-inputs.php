@@ -10,7 +10,7 @@
 function sv_wc_measurement_price_calculator_amount_needed() {
 
 	// bail if we're not on a product page
-	if ( ! is_product() ) {
+	if ( ! ( function_exists( 'is_product' ) && is_product() ) ) {
 		return;
 	}
 

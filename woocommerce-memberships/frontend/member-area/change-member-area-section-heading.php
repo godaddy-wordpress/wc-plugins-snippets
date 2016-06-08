@@ -1,7 +1,8 @@
-<?php 
+<?php // only copy this line if needed
+
 /**
  * Changes "My Discounts" header to "Exclusive Discounts"
- * Every Member Area section header can be changed in a similar fashion 
+ * Every Member Area section header can be changed in a similar fashion
  *
  * @param string $title the heading text for the member area section
  * @return string $title the updated heading text

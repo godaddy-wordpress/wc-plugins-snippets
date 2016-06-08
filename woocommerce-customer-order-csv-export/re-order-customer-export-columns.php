@@ -1,4 +1,5 @@
-<?php
+<?php // only copy this line if needed
+
 /**
  * Re-order Customer CSV Export Columns
  *
@@ -14,11 +15,11 @@ function sv_wc_csv_export_reorder_customer_columns( $column_headers ) {
 	unset( $column_headers['customer_id'] );
 
 	$new_column_headers = array();
-	
+
 	foreach ( $column_headers as $key => $name ) {
-		
+
 		$new_column_headers[ $key ] = $name;
-		
+
 		if ( 'last_name' == $key ) {
 			// re-add customer_id immediately after last_name
 			$new_column_headers['customer_id'] = 'customer_id';

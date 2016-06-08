@@ -4,19 +4,19 @@
  * Adds JS code to footer on product pages
  * to swap width and length price calculator field rows
  *
- * This will print on any product, therefore it'd be best 
+ * This will print on any product, therefore it'd be best
  * to add some checks to ensure it prints on MPC products
  * with width and length needed fields (Area LxW measurement)
  */
 function sv_wc_swap_mpc_rows() {
 
 	// bail if we're not on a product page
-	if ( ! is_product() ) {
+	if ( ! ( function_exists( 'is_product' ) && is_product() ) ) {
 		return;
 	}
 
 	wc_enqueue_js( '
-	
+
 			var  $price_calculator = $( "#price_calculator" );
 
 			if ( $price_calculator ) {

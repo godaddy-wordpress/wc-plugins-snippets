@@ -1,9 +1,10 @@
-<?php
+<?php // only copy this line if needed
+
 /**
  * Adds social login buttons to the Product Reviews Pro login modal
  * and changes the instruction text to make it more relevant
  */
- 
+
 
 /**
  * Add login buttons to the Product Reviews Pro login modal
@@ -31,7 +32,7 @@ function sv_wc_social_login_change_prpro_login_text( $login_text ) {
 	if ( is_product() ) {
    		$login_text = __( 'You can also create an account or log in with a social network.', 'my-textdomain' );
    	}
- 
+
  	return $login_text;
 }
 add_filter( 'pre_option_wc_social_login_text', 'sv_wc_social_login_change_prpro_login_text' );

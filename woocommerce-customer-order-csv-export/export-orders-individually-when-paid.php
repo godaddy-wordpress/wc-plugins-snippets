@@ -1,4 +1,5 @@
-<?php
+<?php // only copy this line if needed
+
 /**
  * Export each order individually when paid
  *
@@ -13,6 +14,6 @@ function sv_wc_csv_export_export_order_on_payment( $order_id ) {
 
 	// uncomment for HTTP POST
 	// $export->http_post();
-	
+
 }
 add_action( 'woocommerce_payment_complete', 'sv_wc_csv_export_export_order_on_payment' );

@@ -1,4 +1,5 @@
-<?php
+<?php // only copy this line if needed
+
 /**
  * Membership access is already granted when orders are processing or completed
  * Add membership access for custom order statuses as well
@@ -19,7 +20,7 @@ add_action( 'init', 'sv_wc_memberships_grant_access_for_custom_order_statuses', 
 
 
 /**
- * Include custom order statuses in the plan "Grant Access" action to 
+ * Include custom order statuses in the plan "Grant Access" action to
  * create new memberships as well
  *
  * Example: include "Shipped" and "Invoice Paid Orders" in "Grant Access" action for memberships

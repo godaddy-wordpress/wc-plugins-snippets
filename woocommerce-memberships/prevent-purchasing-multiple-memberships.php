@@ -1,4 +1,5 @@
 <?php // only copy this line if needed
+
 /**
  * There are two ways we could prevent purchasing more than one membership:
  *  1. prevent access if the customer already has an active membership
@@ -6,7 +7,7 @@
  *
  * This snippet shows the second scenario.
  */
- 
+
 
 /**
  * Do not grant membership access to purchasers if they already hold any membership, regardless of status

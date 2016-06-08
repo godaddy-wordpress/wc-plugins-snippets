@@ -1,4 +1,5 @@
-<?php
+<?php // only copy this line if needed
+
 /**
  * Change the "content delayed" message displayed to members who will have access, but not yet
  * Example: change the delayed content message for the "Projects" post type

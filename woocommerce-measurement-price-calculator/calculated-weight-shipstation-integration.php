@@ -15,6 +15,7 @@ function sv_wc_mpc_shipstation_product_weight() {
 }
 add_action( 'woocommerce_api_wc_shipstation',  'sv_wc_mpc_shipstation_product_weight', 9 );
 
+
 /**
  * Filter the product retruned by `WC_Order::woocommerce_get_product_from_item()`
  * to re-calculate a Measurement Price Calculator product's weight based on the

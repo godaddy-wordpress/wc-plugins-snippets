@@ -1,4 +1,5 @@
-<?php
+<?php // only copy this line if needed
+
 /**
  * Remove post types from the membership plan restriction options
  * Example: remove Sensei Messages from post types that can be restricted

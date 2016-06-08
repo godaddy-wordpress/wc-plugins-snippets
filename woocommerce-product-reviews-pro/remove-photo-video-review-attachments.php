@@ -1,4 +1,5 @@
 <?php // only copy this line if needed
+
 /**
  * Removes the photo and video attachments from Product Reviews Pro review form
  *

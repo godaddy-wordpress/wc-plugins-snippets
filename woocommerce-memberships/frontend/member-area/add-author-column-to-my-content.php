@@ -1,4 +1,5 @@
-<?php
+<?php // only copy this line if needed
+
 /**
  * Add an "Author" column to the "My Content" table in the members area
  *
@@ -8,17 +9,17 @@
 function sv_wc_memberships_my_content_table_add_column( $columns ) {
 
     $new_columns = array();
-    
+
     foreach ( $columns as $column_id => $column_name ) {
-    
+
         $new_columns[ $column_id ] = $column_name;
-        
+
         // insert our new "Author" column after the "Title" column
         if ( 'membership-content-title' === $column_id ) {
             $new_columns['membership-content-author'] = __( 'Author', 'your-textdomain' );
         }
     }
-    
+
     return $new_columns;
 }
 add_filter( 'wc_memberships_members_area_my_membership_content_column_names', 'sv_members_area_content_table_columns', 11 );

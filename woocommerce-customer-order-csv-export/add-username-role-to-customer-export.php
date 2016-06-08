@@ -1,9 +1,10 @@
-<?php
+<?php // only copy this line if needed
+
 /**
  * Adds columns for username and role to the Default customer export format
  */
- 
- 
+
+
 /**
  * Filters the column headers for the customer export
  *
@@ -25,7 +26,7 @@ function sv_wc_customer_csv_export_column_headers( $column_headers ) {
 			// Add columns for each piece of data
 			$new_headers['username'] = 'username';
 		}
-	
+
 		// Adds new column after 'last_name' column
 		if ( 'last_name' === $key ) {
 			$new_headers['role'] = 'role';
@@ -56,7 +57,7 @@ function sv_wc_customer_csv_export_customer_row( $customer_data, $user ) {
 	// Only add data for non-guests
 	if ( 0 !== $user->ID ) {
 
-		$username = $user->user_login;		
+		$username = $user->user_login;
 		$_roles = $user->roles;
 		$role = implode( ",", $_roles );
 	}

@@ -1,4 +1,5 @@
-<?php
+<?php // only copy this line if needed
+
 /**
  * Adds columns for product ID and variation ID to the Default - One Row per Item export format
  */
@@ -15,11 +16,11 @@ function sv_wc_csv_export_order_line_item_id( $line_item, $item, $product ) {
 
 	$line_item['item_id'] = $product->id;
 	$line_item['variation_id'] = 'n/a';
-	
+
 	// set the variation id for variable products
 	if ( $product->is_type( 'variation' ) ) {
 		$line_item['variation_id'] = $product->get_variation_id();
-	} 
+	}
 
 	return $line_item;
 
@@ -37,29 +38,29 @@ add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_or
 function sv_wc_csv_export_modify_column_headers_item_id( $column_headers, $csv_generator ) {
 
 	if ( 'default_one_row_per_item' === $csv_generator->order_format ) {
-	
+
 		$new_headers = array();
-	
+
 		foreach( $column_headers as $key => $value ) {
-	
+
 			$new_headers[ $key ] = $value;
-	
+
 			// Adds new headers after 'item_name' column
 			if ( 'item_name' === $key ) {
 				// Add columns for each piece of data
 				$new_headers['item_id'] = 'item_id';
 				$new_headers['variation_id'] = 'variation_id';
-	
+
 			}
-	
+
 		}
-	
+
 		return $new_headers;
-	
+
 	} else {
-	
+
 		return $column_headers;
-	
+
 	}
 }
 add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_modify_column_headers_item_id', 10, 2 );

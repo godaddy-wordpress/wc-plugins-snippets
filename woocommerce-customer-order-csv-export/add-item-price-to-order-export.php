@@ -1,4 +1,5 @@
-<?php
+<?php // only copy this line if needed
+
 /**
  * Show the product price in the Default - One Row per Item order export format
  * Adds a column for item price
