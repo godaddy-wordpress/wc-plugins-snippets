@@ -1,4 +1,5 @@
-<?php 
+<?php // only copy this line if needed
+
 /**
  * Removes the product short description / excerpt column from "My Products"
  * section of the member area
@@ -8,10 +9,7 @@
  */
 function sv_wc_memberships_my_products_table_columns( $columns ) {
 
-    if ( isset( $columns['membership-product-excerpt'] ) ) {
-        unset( $columns['membership-product-excerpt'] );
-    }
-
+    unset( $columns['membership-product-excerpt'] );
     return $columns;
 }
 add_filter('wc_memberships_members_area_my_membership_products_column_names', 'sv_wc_memberships_my_products_table_columns', 10, 1 );

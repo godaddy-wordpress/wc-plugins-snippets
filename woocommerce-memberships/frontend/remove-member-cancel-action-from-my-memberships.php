@@ -1,4 +1,5 @@
-<?php
+<?php // only copy this line if needed
+
 /**
  * Remove the "Cancel" action for members from the "My Memberships" table
  * Memberships will have to be cancelled manually by a shop admin
@@ -8,10 +9,7 @@
  */
 function sv_edit_my_memberships_actions( $actions ) {
 
-	if ( isset( $actions['cancel'] ) ) {
-		unset( $actions['cancel'] );
-	}
-	
+	unset( $actions['cancel'] );
 	return $actions;
 }
 add_filter( 'wc_memberships_members_area_my-memberships_actions', 'sv_edit_my_memberships_actions' );
