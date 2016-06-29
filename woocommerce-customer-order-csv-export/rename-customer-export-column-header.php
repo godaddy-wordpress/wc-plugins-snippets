@@ -13,7 +13,7 @@
 function sv_wc_csv_export_rename_customer_column( $column_headers ) {
 
 	$column_headers['customer_id'] = 'User ID';
-	return $column_headers;
 
+	return $column_headers;
 }
 add_filter( 'wc_customer_order_csv_export_customer_headers', 'sv_wc_csv_export_rename_customer_column' );

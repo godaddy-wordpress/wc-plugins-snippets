@@ -14,7 +14,7 @@
  */
 function sv_wc_csv_export_order_line_item_id( $line_item, $item, $product ) {
 
-	$line_item['item_id'] = $product->id;
+	$line_item['item_id']      = $product->id;
 	$line_item['variation_id'] = 'n/a';
 
 	// set the variation id for variable products
@@ -23,7 +23,6 @@ function sv_wc_csv_export_order_line_item_id( $line_item, $item, $product ) {
 	}
 
 	return $line_item;
-
 }
 add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_order_line_item_id', 10, 3 );
 
@@ -41,27 +40,23 @@ function sv_wc_csv_export_modify_column_headers_item_id( $column_headers, $csv_g
 
 		$new_headers = array();
 
-		foreach( $column_headers as $key => $value ) {
+		foreach ( $column_headers as $key => $value ) {
 
 			$new_headers[ $key ] = $value;
 
 			// Adds new headers after 'item_name' column
 			if ( 'item_name' === $key ) {
+
 				// Add columns for each piece of data
 				$new_headers['item_id'] = 'item_id';
 				$new_headers['variation_id'] = 'variation_id';
-
 			}
-
 		}
 
-		return $new_headers;
-
-	} else {
-
-		return $column_headers;
-
+		$column_headers = $new_headers;
 	}
+
+	return $column_headers;
 }
 add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_modify_column_headers_item_id', 10, 2 );
 
@@ -75,7 +70,7 @@ add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_modi
  */
 function sv_wc_csv_export_order_row_one_row_per_item_ids( $order_data, $item ) {
 
-	$order_data['item_id'] = $item['item_id'];
+	$order_data['item_id']      = $item['item_id'];
 	$order_data['variation_id'] = $item['variation_id'];
 
 	return $order_data;

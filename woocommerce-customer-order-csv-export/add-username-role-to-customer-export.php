@@ -23,6 +23,7 @@ function sv_wc_customer_csv_export_column_headers( $column_headers ) {
 
 		// Adds new columns after 'customer_id' column
 		if ( 'customer_id' === $key ) {
+
 			// Add columns for each piece of data
 			$new_headers['username'] = 'username';
 		}

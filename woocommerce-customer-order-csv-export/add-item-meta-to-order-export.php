@@ -18,8 +18,8 @@
 function sv_wc_csv_export_add_weight_to_line_item( $line_item, $item, $product, $order ) {
 
 	$line_item['weight'] = $product->get_weight();
-	return $line_item;
 
+	return $line_item;
 }
 add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_add_weight_to_line_item', 10, 4 );
 

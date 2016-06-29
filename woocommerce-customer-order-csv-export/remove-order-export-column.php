@@ -12,7 +12,7 @@
 function sv_wc_csv_export_remove_column( $column_headers ) {
 
 	unset( $column_headers['coupon_items'] );
-	return $column_headers;
 
+	return $column_headers;
 }
 add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_remove_column' );

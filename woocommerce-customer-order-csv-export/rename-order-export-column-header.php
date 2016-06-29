@@ -13,7 +13,7 @@
 function sv_wc_csv_export_rename_column( $column_headers ) {
 
 	$column_headers['order_notes'] = 'Notes';
-	return $column_headers;
 
+	return $column_headers;
 }
 add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_rename_column' );

@@ -13,7 +13,7 @@
 function sv_wc_csv_export_remove_customer_column( $column_headers ) {
 
 	unset( $column_headers['shipping_country'] );
-	return $column_headers;
 
+	return $column_headers;
 }
 add_filter( 'wc_customer_order_csv_export_customer_headers', 'sv_wc_csv_export_remove_customer_column' );
