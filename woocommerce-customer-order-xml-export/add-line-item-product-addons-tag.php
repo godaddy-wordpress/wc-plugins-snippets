@@ -57,26 +57,29 @@ function sv_wc_xml_export_get_line_item_addons( $item, $addons ) {
 
 	foreach ( $addons as $addon ) {
 
-		if ( is_array( $addon ) && ! empty ( $addon ) ) {
+		// sanity check
+		if ( ! is_array( $addon ) || empty ( $addon ) ) {
+			return $product_addons;
+		}
 
-			// loop line item data
-			foreach ( $item as $key => $value ) {
+		// loop line item data
+		foreach ( $item as $key => $value ) {
 
-				// check if the beginning of the meta key matches the add-on name
-				if ( $addon['name'] == substr( $key, 0, strlen( $addon['name'] ) ) ) {
+			// check if the beginning of the meta key matches the add-on name
+			if ( $addon['name'] == substr( $key, 0, strlen( $addon['name'] ) ) ) {
 
-					$price = substr( $key, strrpos( $key, '(' ), strrpos( $key, ')' ) );
+				// this way, the length will be 0 without a trailing paren to get a "false" $price
+				$price = substr( $key, strrpos( $key, '(' ), strrpos( $key, ')' ) );
 
-					if ( $price ) {
-						preg_match( '#\((.*?)\)#', $price, $match );
-					}
-
-					$product_addons[] = array(
-						'Name'  => $addon['name'],
-						'Value' => $value,
-						'Price' => $price ? html_entity_decode( $match[1] ) : ' - ',
-					);
+				if ( $price ) {
+					preg_match( '#\((.*?)\)#', $price, $match );
 				}
+
+				$product_addons[] = array(
+					'Name'  => $addon['name'],
+					'Value' => $value,
+					'Price' => $price ? html_entity_decode( $match[1] ) : ' - ',
+				);
 			}
 		}
 	}
