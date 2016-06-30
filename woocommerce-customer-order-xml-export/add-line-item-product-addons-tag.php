@@ -74,7 +74,7 @@ function sv_wc_xml_export_get_line_item_addons( $item, $addons ) {
 					$product_addons[] = array(
 						'Name'  => $addon['name'],
 						'Value' => $value,
-						'Price' => $price ? $match[1] : ' - ',
+						'Price' => $price ? html_entity_decode( $match[1] ) : ' - ',
 					);
 				}
 			}
