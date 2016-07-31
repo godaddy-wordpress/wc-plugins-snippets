@@ -11,7 +11,6 @@ function sv_wc_csv_export_add_item_count_column( $column_headers, $csv_generator
 
 	$new_columns = array();
 
-
 	foreach ( $column_headers as $id => $header )  {
 
 		$new_columns[ $id ] = $header;
