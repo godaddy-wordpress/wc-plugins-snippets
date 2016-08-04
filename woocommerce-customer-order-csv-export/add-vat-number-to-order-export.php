@@ -15,6 +15,7 @@ function sv_wc_csv_export_modify_column_headers_vat_number( $column_headers, $cs
 }
 add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_modify_column_headers_vat_number', 10, 2 );
 
+
 /**
  * Add `vat_number` column data
  *
@@ -26,13 +27,14 @@ add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_modi
  * @param \WC_Customer_Order_CSV_Export_Generator $csv_generator the generator instance
  * @return array the updated column data
  */
-function wc_csv_export_modify_row_data_vat_number( $order_data, $order, $csv_generator ) {
+function sv_wc_csv_export_modify_row_data_vat_number( $order_data, $order, $csv_generator ) {
 
 	$vat_number = '';
 
 	// find VAT number if one exists for the order
 	$vat_number_meta_keys = array(
-		'VAT Number',
+		'_vat_number',				 // EU VAT number
+		'VAT Number',				 // Legacy EU VAT number
 		'vat_number',                // Taxamo
 		'_billing_wc_avatax_vat_id', // AvaTax
 	);
@@ -64,4 +66,4 @@ function wc_csv_export_modify_row_data_vat_number( $order_data, $order, $csv_gen
 
 	return $new_order_data;
 }
-add_filter( 'wc_customer_order_csv_export_order_row', 'wc_csv_export_modify_row_data_vat_number', 10, 3 );
+add_filter( 'wc_customer_order_csv_export_order_row', 'sv_wc_csv_export_modify_row_data_vat_number', 10, 3 );
