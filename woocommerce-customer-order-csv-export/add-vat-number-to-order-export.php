@@ -53,7 +53,9 @@ function sv_wc_csv_export_modify_row_data_vat_number( $order_data, $order, $csv_
 
 	$new_order_data = array();
 
-	if ( isset( $csv_generator->order_format ) && ( 'default_one_row_per_item' == $csv_generator->order_format || 'legacy_one_row_per_item' == $csv_generator->order_format ) ) {
+	$export_format = version_compare( wc_customer_order_csv_export()->get_version(), '4.0.0', '<' ) ? $csv_generator->order_format : $csv_generator->export_format;
+
+	if ( 'default_one_row_per_item' === $export_format || 'legacy_one_row_per_item' === $export_format ) {
 
 		foreach ( $order_data as $data ) {
 			$new_order_data[] = array_merge( (array) $data, $custom_data );

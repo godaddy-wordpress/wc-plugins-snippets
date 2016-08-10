@@ -36,13 +36,15 @@ add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_add_
  */
 function sv_wc_csv_export_add_item_count_data( $order_data, $order, $csv_generator ) {
 
+	$export_format = version_compare( wc_customer_order_csv_export()->get_version(), '4.0.0', '<' ) ? $csv_generator->order_format : $csv_generator->export_format;
+
 	$custom_data = array(
 		'item_count' => $order->get_item_count(),
 	);
 
 	$new_order_data = array();
 
-	if ( isset( $csv_generator->order_format ) && ( 'default_one_row_per_item' == $csv_generator->order_format || 'legacy_one_row_per_item' == $csv_generator->order_format ) ) {
+	if ( 'default_one_row_per_item' === $export_format || 'legacy_one_row_per_item' === $export_format ) {
 
 		foreach ( $order_data as $data ) {
 			$new_order_data[] = array_merge( (array) $data, $custom_data );

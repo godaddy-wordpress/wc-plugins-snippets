@@ -53,14 +53,14 @@ add_filter( 'wc_customer_order_csv_export_customer_headers', 'sv_wc_customer_csv
 function sv_wc_customer_csv_export_customer_row( $customer_data, $user ) {
 
 	$username = '';
-	$role = '';
+	$role     = '';
 
 	// Only add data for non-guests
 	if ( 0 !== $user->ID ) {
 
 		$username = $user->user_login;
-		$_roles = $user->roles;
-		$role = implode( ",", $_roles );
+		$_roles   = $user->roles;
+		$role     = implode( ",", $_roles );
 	}
 
 	return array_merge( array( 'role' => $role, 'username' => $username ), $customer_data );
