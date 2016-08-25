@@ -36,9 +36,7 @@ add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_or
  */
 function sv_wc_csv_export_modify_column_headers_item_id( $column_headers, $csv_generator ) {
 
-	$export_format = version_compare( wc_customer_order_csv_export()->get_version(), '4.0.0', '<' ) ? $csv_generator->order_format : $csv_generator->export_format;
-
-	if ( 'default_one_row_per_item' === $export_format ) {
+	if ( sv_wc_csv_export_is_one_row( $csv_generator ) ) {
 
 		$new_headers = array();
 
@@ -78,3 +76,29 @@ function sv_wc_csv_export_order_row_one_row_per_item_ids( $order_data, $item ) {
 	return $order_data;
 }
 add_filter( 'wc_customer_order_csv_export_order_row_one_row_per_item', 'sv_wc_csv_export_order_row_one_row_per_item_ids', 10, 2 );
+
+
+/**
+ * Helper function to check the export format
+ *
+ * @param \WC_Customer_Order_CSV_Export_Generator $csv_generator the generator instance
+ * @return bool - true if this is a one row per item format
+ */
+function sv_wc_csv_export_is_one_row( $csv_generator ) {
+
+	$one_row_per_item = false;
+
+	if ( version_compare( wc_customer_order_csv_export()->get_version(), '4.0.0', '<' ) ) {
+
+		// pre 4.0 compatibility
+		$one_row_per_item = ( 'default_one_row_per_item' === $csv_generator->order_format || 'legacy_one_row_per_item' === $csv_generator->order_format );
+
+	} elseif ( isset( $csv_generator->format_definition ) ) {
+
+		// post 4.0 (requires 4.0.3+)
+		$one_row_per_item = 'item' === $csv_generator->format_definition['row_type'];
+	}
+
+	return $one_row_per_item;
+}
+

@@ -2,6 +2,7 @@
 
 /**
  * Adds product attributes to the one row per item order export
+ * CANNOT be used with non-one row per item formats
  */
 
 
@@ -50,9 +51,18 @@ add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_ad
 function sv_wc_csv_export_add_product_attributes( $order_data, $item ) {
 
 	$order_data['product_attributes'] = '';
+	$count                            = 1;
 
 	foreach ( array_keys( $item['product']->get_attributes() ) as $attribute ) {
+
 		$order_data['product_attributes'] .= str_replace( 'pa_', '', $attribute ) . '=' . $item['product']->get_attribute( $attribute );
+
+		// add a semicolon divider if there are multiple attributes and it's not the last one
+		if ( count( $item['product']->get_attributes() ) > 1 && $count !== count( $item['product']->get_attributes() ) ) {
+			$order_data['product_attributes'] .= ';';
+		}
+
+		$count++;
 	}
 
 	return $order_data;

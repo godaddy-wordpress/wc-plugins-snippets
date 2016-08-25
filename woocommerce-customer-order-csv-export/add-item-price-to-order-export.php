@@ -1,8 +1,8 @@
 <?php // only copy this line if needed
 
 /**
- * Show the product price in the Default - One Row per Item order export format
- * Adds a column for item price
+ * Show the product price in the default order export formats
+ * Adds a column for item price to One Row per Item formats
  */
 
 
@@ -36,17 +36,15 @@ add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_or
 /**
  * Add `item_price` column to the Default - One Row per Item export format
  *
- * @param array  $column_headers the original column headers
+ * @param array $column_headers the original column headers
  * @param WC_Customer_Order_CSV_Export_Generator $csv_generator the generator instance
  * @return array - the updated column headers
  */
 function sv_wc_csv_export_modify_column_headers_item_price( $column_headers, $csv_generator ) {
 
-	$export_format = version_compare( wc_customer_order_csv_export()->get_version(), '4.0.0', '<' ) ? $csv_generator->order_format : $csv_generator->export_format;
-
 	$new_headers = array();
 
-	if ( 'default_one_row_per_item' === $export_format ) {
+	if ( sv_wc_csv_export_is_one_row( $csv_generator ) ) {
 
 		foreach( $column_headers as $key => $column ) {
 
@@ -77,7 +75,32 @@ add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_modi
 function sv_wc_csv_export_order_row_one_row_per_item_price( $order_data, $item ) {
 
 	$order_data['item_price'] = wc_format_decimal( $item['price'], 2 );
-
 	return $order_data;
 }
 add_filter( 'wc_customer_order_csv_export_order_row_one_row_per_item', 'sv_wc_csv_export_order_row_one_row_per_item_price', 10, 2 );
+
+
+/**
+ * Helper function to check the export format
+ *
+ * @param \WC_Customer_Order_CSV_Export_Generator $csv_generator the generator instance
+ * @return bool - true if this is a one row per item format
+ */
+function sv_wc_csv_export_is_one_row( $csv_generator ) {
+
+	$one_row_per_item = false;
+
+	if ( version_compare( wc_customer_order_csv_export()->get_version(), '4.0.0', '<' ) ) {
+
+		// pre 4.0 compatibility
+		$one_row_per_item = ( 'default_one_row_per_item' === $csv_generator->order_format || 'legacy_one_row_per_item' === $csv_generator->order_format );
+
+	} elseif ( isset( $csv_generator->format_definition ) ) {
+
+		// post 4.0 (requires 4.0.3+)
+		$one_row_per_item = 'item' === $csv_generator->format_definition['row_type'];
+	}
+
+	return $one_row_per_item;
+}
+
