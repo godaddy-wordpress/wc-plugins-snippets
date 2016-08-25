@@ -43,8 +43,8 @@ function sv_wc_csv_export_modify_row_data_vat_number( $order_data, $order, $csv_
 
 	// find VAT number if one exists for the order
 	$vat_number_meta_keys = array(
-		'_vat_number',				 // EU VAT number
-		'VAT Number',				 // Legacy EU VAT number
+		'_vat_number',               // EU VAT number
+		'VAT Number',                // Legacy EU VAT number
 		'vat_number',                // Taxamo
 		'_billing_wc_avatax_vat_id', // AvaTax
 	);
