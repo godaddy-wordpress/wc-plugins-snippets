@@ -17,6 +17,8 @@
 /**
  * Adds Product Addons to the Line Item XML if available
  *
+ * REQUIRES v2.0+ of XML Export; use `wc_customer_order_xml_export_suite_order_export_line_item_format` filter for earlier versions
+ *
  * @param array $item_format line item XML data to write
  * @param \WC_Order $order
  * @param array $item the line item order data
@@ -41,7 +43,7 @@ function sv_wc_xml_export_line_item_addons( $item_format, $order, $item ) {
 
 	return $item_format;
 }
-add_filter( 'wc_customer_order_xml_export_suite_order_export_line_item_format', 'sv_wc_xml_export_line_item_addons', 10, 3 );
+add_filter( 'wc_customer_order_xml_export_suite_order_line_item', 'sv_wc_xml_export_line_item_addons', 10, 3 );
 
 
 /**
