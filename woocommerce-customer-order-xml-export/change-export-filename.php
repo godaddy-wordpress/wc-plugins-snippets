@@ -3,6 +3,8 @@
 /**
  * Change the date format for the filename from YYYY_MM_DD_HH_SS to YYYY-MM-DD
  *
+ * REQUIRES v2.0+ of XML Export; use `wc_customer_order_xml_export_suite_export_file_name` filter for earlier versions
+ *
  * @param string $post_replace_filename the filename after variables have been replaced
  * @param string $pre_replace_filename the filename before variables have been replaced
  * @return string the updated filename with replace variables
@@ -19,4 +21,4 @@ function sv_wc_xml_export_suite_edit_file_name( $post_replace_file_name, $pre_re
 	return str_replace( $variables, $replacement, $pre_replace_file_name );
 
 }
-add_filter( 'wc_customer_order_xml_export_suite_export_file_name', 'sv_wc_xml_export_suite_edit_file_name', 10, 2 );
+add_filter( 'wc_customer_order_xml_export_suite_filename', 'sv_wc_xml_export_suite_edit_file_name', 10, 2 );
