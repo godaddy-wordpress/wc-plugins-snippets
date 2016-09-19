@@ -3,6 +3,8 @@
 /**
  * Add `VATNumber` tag
  *
+ * REQUIRES v2.0+ of XML Export; earlier versions should use the `wc_customer_order_xml_export_suite_order_export_order_list_format` filter
+ *
  * @param array $format the original format tags
  * @param \WC_Order $order the order instance
  * @return array - the updated format tags
@@ -22,7 +24,7 @@ function sv_wc_xml_export_add_vat_number_item( $format, $order ) {
 
 	return $new_format;
 }
-add_filter( 'wc_customer_order_xml_export_suite_order_export_order_list_format', 'sv_wc_xml_export_add_vat_number_item', 10, 2 );
+add_filter( 'wc_customer_order_xml_export_suite_order_data', 'sv_wc_xml_export_add_vat_number_item', 10, 2 );
 
 
 /**
@@ -52,6 +54,6 @@ function sv_wc_xml_export_vat_number_data( $order ) {
 			return get_post_meta( $order->id, $meta_key, true );
 		}
 	}
-	
+
 	return $vat_number;
 }
