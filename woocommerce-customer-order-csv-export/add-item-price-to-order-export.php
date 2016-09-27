@@ -80,6 +80,8 @@ function sv_wc_csv_export_order_row_one_row_per_item_price( $order_data, $item )
 add_filter( 'wc_customer_order_csv_export_order_row_one_row_per_item', 'sv_wc_csv_export_order_row_one_row_per_item_price', 10, 2 );
 
 
+if ( ! function_exists( 'sv_wc_csv_export_is_one_row' ) ) :
+
 /**
  * Helper function to check the export format
  *
@@ -104,3 +106,4 @@ function sv_wc_csv_export_is_one_row( $csv_generator ) {
 	return $one_row_per_item;
 }
 
+endif;

@@ -76,6 +76,8 @@ function sv_wc_csv_export_modify_row_data_vat_number( $order_data, $order, $csv_
 add_filter( 'wc_customer_order_csv_export_order_row', 'sv_wc_csv_export_modify_row_data_vat_number', 10, 3 );
 
 
+if ( ! function_exists( 'sv_wc_csv_export_is_one_row' ) ) :
+
 /**
  * Helper function to check the export format
  *
@@ -99,3 +101,5 @@ function sv_wc_csv_export_is_one_row( $csv_generator ) {
 
 	return $one_row_per_item;
 }
+
+endif;
