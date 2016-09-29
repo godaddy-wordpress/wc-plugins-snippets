@@ -101,7 +101,9 @@ function sv_wc_csv_export_localize_price_items_columns( $item_data ) {
 	// localize price for each piece of price data
 	foreach ( $price_data as $data_key ) {
 
-		$item_data[ $data_key ] = number_format( $item_data[ $data_key ], $decimals, $decimal_separator, $thousand_separator );
+		if ( isset( $item_data[ $data_key ] ) ) {
+			$item_data[ $data_key ] = number_format( $item_data[ $data_key ], $decimals, $decimal_separator, $thousand_separator );
+		}
 	}
 
 	return $item_data;
