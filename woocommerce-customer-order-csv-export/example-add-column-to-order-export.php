@@ -1,7 +1,7 @@
 <?php // only copy this line if needed
 
 /**
- * Add `example` column header
+ * Add `example` column header and remove the `billing_company` column
  *
  * @param array $column_headers the original column headers
  * @param \WC_Customer_Order_CSV_Export_Generator $csv_generator the generator instance
@@ -10,6 +10,9 @@
 function sv_wc_csv_export_modify_column_headers_example( $column_headers, $csv_generator ) {
 
 	$column_headers['example'] = 'example';
+
+	// remove the `billing_company` column
+	unset( $column_headers['billing_company'] );
 
 	return $column_headers;
 }
