@@ -10,9 +10,15 @@
  */
 function sv_pip_view_invoice_button_html( $button, $action ) {
     
+	// you can use conditions checking $action so you will know which is the context
     if ( 'send_email' === $action ) {
+		
+		// if you want to remove the button link you can just return empty string
         $button = '';
+		
     } elseif ( 'print' === $action ) {
+		
+		// if you need to add some HTML, you could do so:
 		$button = '<span class="my-css-class">' . $button . '</span>';
 	}
     
