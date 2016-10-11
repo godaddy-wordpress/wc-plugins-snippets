@@ -20,3 +20,4 @@ function sv_pip_view_invoice_button_html( $button, $action ) {
 }
 
 add_filter( 'wc_pip_view_invoice_button_html', 'sv_pip_view_invoice_button_html', 10, 2 );
+	
