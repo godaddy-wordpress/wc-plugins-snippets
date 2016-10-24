@@ -1,7 +1,7 @@
 <?php
 /**
  * Allow Order editing for custom statuses
- * 
+ *
  * @param bool $editable if the order is editable
  * @param \WC_order $order
  * @return bool if the order is editable for this status
@@ -18,4 +18,4 @@ function sv_wc_order_status_manager_order_is_editable( $editable, $order ) {
 
 	return $editable;
 }
-add_filter( 'wc_order_is_editable', 'sv_wc_order_status_manager_order_is_editable', 10, 2 );
+add_filter( 'wc_order_is_editable', 'sv_wc_order_status_manager_order_is_editable', 20, 2 );
