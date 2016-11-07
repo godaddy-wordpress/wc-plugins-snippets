@@ -10,9 +10,9 @@
  */
 function sv_wc_csv_export_localize_price_columns( $order_data, $order, $generator ) {
 
-	$decimals           = (int) get_option( 'woocommerce_price_num_decimals', 2 );
-	$decimal_separator  = get_option( 'woocommerce_price_decimal_sep', '.' );
-	$thousand_separator = get_option( 'woocommerce_price_thousand_sep', ',' );
+	$decimals           = wc_get_price_decimals();
+	$decimal_separator  = wc_get_price_decimal_separator();
+	$thousand_separator = wc_get_price_thousand_separator();
 
 	$price_columns = array(
 		'shipping_total',
@@ -48,6 +48,42 @@ function sv_wc_csv_export_localize_price_columns( $order_data, $order, $generato
 add_filter( 'wc_customer_order_csv_export_order_row', 'sv_wc_csv_export_localize_price_columns', 10, 3 );
 
 
+/**
+ * Uses the WooCommerce currency display settings to format CSV price values instead of machine-readable values
+ *
+ * @param array $item_data the data "items" columns in the CSV Export file
+ * @return array - updated item data
+ */
+function sv_wc_csv_export_localize_price_items_columns( $item_data ) {
+
+	$decimals           = wc_get_price_decimals();
+	$decimal_separator  = wc_get_price_decimal_separator();
+	$thousand_separator = wc_get_price_thousand_separator();
+
+	$price_data = array(
+		'subtotal',
+		'subtotal_tax',
+		'total',
+		'total_tax',
+		'refunded',
+	);
+
+	// localize price for each piece of price data
+	foreach ( $price_data as $data_key ) {
+
+		if ( isset( $item_data[ $data_key ] ) ) {
+			$item_data[ $data_key ] = number_format( $item_data[ $data_key ], $decimals, $decimal_separator, $thousand_separator );
+		}
+	}
+
+	return $item_data;
+}
+add_filter( 'wc_customer_order_csv_export_order_line_item',     'sv_wc_csv_export_localize_price_items_columns' );
+add_filter( 'wc_customer_order_csv_export_order_shipping_item', 'sv_wc_csv_export_localize_price_items_columns' );
+add_filter( 'wc_customer_order_csv_export_order_fee_item',      'sv_wc_csv_export_localize_price_items_columns' );
+add_filter( 'wc_customer_order_csv_export_order_tax_item',      'sv_wc_csv_export_localize_price_items_columns' );
+
+
 if ( ! function_exists( 'sv_wc_csv_export_is_one_row' ) ) :
 
 /**
@@ -76,39 +112,3 @@ function sv_wc_csv_export_is_one_row( $csv_generator ) {
 }
 
 endif;
-
-
-/**
- * Uses the WooCommerce currency display settings to format CSV price values instead of machine-readable values
- *
- * @param array $item_data the data "items" columns in the CSV Export file
- * @return array - updated item data
- */
-function sv_wc_csv_export_localize_price_items_columns( $item_data ) {
-
-	$decimals           = (int) get_option( 'woocommerce_price_num_decimals', 2 );
-	$decimal_separator  = get_option( 'woocommerce_price_decimal_sep', '.' );
-	$thousand_separator = get_option( 'woocommerce_price_thousand_sep', ',' );
-
-	$price_data = array(
-		'subtotal',
-		'subtotal_tax',
-		'total',
-		'total_tax',
-		'refunded',
-	);
-
-	// localize price for each piece of price data
-	foreach ( $price_data as $data_key ) {
-
-		if ( isset( $item_data[ $data_key ] ) ) {
-			$item_data[ $data_key ] = number_format( $item_data[ $data_key ], $decimals, $decimal_separator, $thousand_separator );
-		}
-	}
-
-	return $item_data;
-}
-add_filter( 'wc_customer_order_csv_export_order_line_item',     'sv_wc_csv_export_localize_price_items_columns' );
-add_filter( 'wc_customer_order_csv_export_order_shipping_item', 'sv_wc_csv_export_localize_price_items_columns' );
-add_filter( 'wc_customer_order_csv_export_order_fee_item',      'sv_wc_csv_export_localize_price_items_columns' );
-add_filter( 'wc_customer_order_csv_export_order_tax_item',      'sv_wc_csv_export_localize_price_items_columns' );
