@@ -14,9 +14,18 @@
  */
 function sv_wc_csv_export_add_product_attributes_column( $headers ) {
 
-	$headers['product_attributes'] = 'product_attributes';
+	$new_headers = array();
 
-	return $headers;
+	foreach ( $headers as $key => $header ) {
+
+		$new_headers[ $key ] = $header;
+
+		if ( 'item_name' === $key )  {
+			$new_headers['product_attributes'] = 'product_attributes';
+		}
+	}
+
+	return $new_headers;
 }
 add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_add_product_attributes_column' );
 
@@ -52,6 +61,10 @@ function sv_wc_csv_export_add_product_attributes( $order_data, $item ) {
 
 	$order_data['product_attributes'] = '';
 	$count                            = 1;
+
+	if ( ! is_object( $item['product'] ) ) {
+		return $order_data;
+	}
 
 	foreach ( array_keys( $item['product']->get_attributes() ) as $attribute ) {
 
