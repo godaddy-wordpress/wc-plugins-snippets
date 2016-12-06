@@ -15,7 +15,7 @@ function sv_wc_csv_export_update_exported_order_status( $order, $export_method )
 
 	$order->update_status( 'completed', 'Order exported to CSV.' );
 }
-add_action( 'wc_customer_order_csv_export_order_exported', 'wc_csv_export_update_exported_order_status', 10, 2 );
+add_action( 'wc_customer_order_csv_export_order_exported', 'sv_wc_csv_export_update_exported_order_status', 10, 2 );
 
 
 // OR
@@ -34,4 +34,4 @@ function sv_wc_csv_export_update_exported_order_status( $order ) {
 		$order->update_status( 'completed', 'Order exported to CSV.' );
 	}
 }
-add_action( 'wc_customer_order_csv_export_order_exported', 'wc_csv_export_update_exported_order_status' );
+add_action( 'wc_customer_order_csv_export_order_exported', 'sv_wc_csv_export_update_exported_order_status' );
