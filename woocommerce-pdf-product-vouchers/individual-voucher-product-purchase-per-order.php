@@ -1,38 +1,38 @@
 <?php
 /**
  * Removes add to cart buttons from single product page if:
- *	- the product is sold-individually, 
+ *	- the product is sold-individually,
  *	- has a voucher attached, and
  *	- the product is already in the cart
  * to prevent multiple purchases of a voucher in an order.
  */
 function sv_wc_pdf_product_vouchers_disable_multiple_quantities() {
+	global $product;
 
 	// Bail if PDF Product vouchers isn't active
 	if ( ! function_exists( 'wc_pdf_product_vouchers' ) ) {
 		return;
 	}
-	
+
 	// Get the ID for the current product
-	global $product;
 	$product_id = $product->is_type( 'variation' ) ? $product->variation_id : $product->id;
-    
+
 	// bail unless there's a voucher and the product is sold individually
 	if ( ! ( $product->is_sold_individually() && WC_PDF_Product_Vouchers_Product::has_voucher( $product ) ) ) {
 		return;
 	}
-    
+
 	// check if the item is already in the cart
 	foreach ( WC()->cart->get_cart() as $cart_key => $cart_item ) {
-		
+
 		$cart_product = $cart_item['data'];
-		
+
 		// if our product ID matches an item in the cart, disable purchasing
 		if ( $product->id === $cart_product->id ) {
-		
+
 			// remove add to cart button
 			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
-			
+
 			// add a notice that you can only purchase one
 			function no_purchase_message() {
 				echo '<div class="woocommerce-info">Looks like this product is already in your cart! You can only purchase one per order.</div>';

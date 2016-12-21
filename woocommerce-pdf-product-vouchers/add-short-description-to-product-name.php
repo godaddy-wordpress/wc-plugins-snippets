@@ -9,7 +9,14 @@
  */
 function sv_wc_pdf_vouchers_add_product_description( $name, $voucher ) {
 
-	$product = $voucher->get_order()->get_product_from_item( $voucher->get_item() );
+	$order = $voucher->get_order();
+
+	// preview context, just add a placeholder
+	if ( ! is_object( $order ) ) {
+		return $name . ' - product short description';
+	}
+
+	$product = $order->get_product_from_item( $voucher->get_item() );
 
 	if ( $product && $short_description = $product->get_post_data()->post_excerpt ) {
 		$name .= ' - ' . $short_description;

@@ -9,7 +9,14 @@
  */
 function sv_wc_pdf_voucher_product_name( $name, $voucher ) {
 
-	$item_data = $voucher->get_item();
+	if ( is_callable( array( $voucher, 'get_item' ) ) ) {
+		$item_data = $voucher->get_item();
+	}
+
+	// preview context
+	else {
+		return $name . ' - attribute1, attribute2';
+	}
 
 	// use the variation name instead of product name if available
 	if ( isset( $item_data['variation_id'] ) && $variation = wc_get_product( $item_data['variation_id'] ) ) {
