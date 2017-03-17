@@ -16,3 +16,5 @@
 .idea/workspace.xml
 
 .DS_Store
+
+.idea/php.xml
