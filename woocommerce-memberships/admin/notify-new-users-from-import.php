@@ -14,7 +14,7 @@ function sv_wc_memberships_import_notify_new_user( $user_membership, $action ) {
 	}
 
 	// the second param here was deprecated in WP 4.3.1
-	if ( version_compare( $wp_version, '4.3.1', '>=' ) {
+	if ( version_compare( $wp_version, '4.3.1', '>=' ) ) {
 		wp_new_user_notification( $user_membership->get_user_id(), null, 'user' );
 	} else {
 		wp_new_user_notification( $user_membership->get_user_id() );
