@@ -1,4 +1,5 @@
-<?php
+<?php // only copy if needed
+
 /**
  * Removes add to cart buttons from single product page if:
  *	- the product is sold-individually,
@@ -14,11 +15,10 @@ function sv_wc_pdf_product_vouchers_disable_multiple_quantities() {
 		return;
 	}
 
-	// Get the ID for the current product
-	$product_id = $product->is_type( 'variation' ) ? $product->variation_id : $product->id;
+	$has_voucher = is_callable( array( 'WC_PDF_Product_Vouchers_Product', 'has_voucher_template' ) ) ? WC_PDF_Product_Vouchers_Product::has_voucher_template( $product ) : WC_PDF_Product_Vouchers_Product::has_voucher( $product );
 
 	// bail unless there's a voucher and the product is sold individually
-	if ( ! ( $product->is_sold_individually() && WC_PDF_Product_Vouchers_Product::has_voucher( $product ) ) ) {
+	if ( ! ( $product->is_sold_individually() && $has_voucher ) ) {
 		return;
 	}
 
@@ -28,7 +28,7 @@ function sv_wc_pdf_product_vouchers_disable_multiple_quantities() {
 		$cart_product = $cart_item['data'];
 
 		// if our product ID matches an item in the cart, disable purchasing
-		if ( $product->id === $cart_product->id ) {
+		if ( $product->get_id() === $cart_product->id ) {
 
 			// remove add to cart button
 			remove_action( 'woocommerce_single_product_summary', 'woocommerce_template_single_add_to_cart', 30 );
