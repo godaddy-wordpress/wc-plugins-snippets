@@ -19,7 +19,7 @@ function sv_wc_csv_export_order_line_item_id( $line_item, $item, $product ) {
 
 	// set the variation id for variable products
 	if ( $product->is_type( 'variation' ) ) {
-		$line_item['item_id']      = $product->get_parent_id();
+		$line_item['item_id']      = is_callable( array( $product, 'get_parent_id') ) ? $product->get_parent_id() : $product->get_parent();
 		$line_item['variation_id'] = $product->get_id();
 	}
 
