@@ -12,6 +12,7 @@
  *
  * @param array $query_args args for retrieving membership content
  * @param string $type Type of request: 'content_restriction', 'product_restriction', 'purchasing_discount'
+ * @return array updated query args
  */
 function sv_wc_memberships_sort_my_content( $query_args, $type ) {
 
@@ -34,6 +35,7 @@ add_filter( 'wc_memberships_get_restricted_posts_query_args', 'sv_wc_memberships
  *
  * @param array $query_args args for retrieving membership content
  * @param string $type Type of request: 'content_restriction', 'product_restriction', 'purchasing_discount'
+ * @return array updated query args
  */
 function sv_wc_memberships_adjust_my_content_query( $query_args, $type ) {
 

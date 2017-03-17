@@ -37,7 +37,7 @@ add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_ad
  * Add `item_weight` column to the default and custom formats
  *
  * @param array $column_headers the original column headers
- * @param WC_Customer_Order_CSV_Export_Generator $csv_generator the generator instance
+ * @param \WC_Customer_Order_CSV_Export_Generator $csv_generator the generator instance
  * @return array - the updated column headers
  */
 function sv_wc_csv_export_modify_column_headers_item_price( $column_headers, $csv_generator ) {
@@ -53,7 +53,6 @@ function sv_wc_csv_export_modify_column_headers_item_price( $column_headers, $cs
 			// add the item_price after the SKU column
 			if ( 'item_sku' === $key ) {
 				$new_headers['item_weight'] = 'item_weight';
-
 			}
 		}
 

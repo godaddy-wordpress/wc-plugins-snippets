@@ -5,6 +5,7 @@
  * the correct weight via the WooCommerce ShipStation Integration
  */
 
+
 /**
  * Filter the product's weight only when the WooCommerce ShipStation API is loaded.
  * This ensures that the `WC_Order::woocommerce_get_product_from_item()` method

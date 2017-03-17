@@ -26,7 +26,7 @@ function sv_wc_memberships_limit_membership_count( $grant_access, $args ) {
 	// you can remove any of these if you don't want to allow multiples
 	// ie you may not want to count complimentary memberships
 	$statuses = array(
-    		'status' => array( 'active', 'complimentary', 'pending', 'free_trial' ),
+		'status' => array( 'active', 'complimentary', 'pending', 'free_trial' ),
 	);
 
 	$active_memberships = wc_memberships_get_user_memberships( $args['user_id'], $statuses );

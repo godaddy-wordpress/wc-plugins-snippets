@@ -8,7 +8,7 @@
  *
  * @param bool $joined true if membership is coupled to a subscription
  * @param int $plan_id the user membership's membership plan ID
- * @returm bool $joined
+ * @return bool $joined
  */
 function sv_wc_memberships_decouple_membership_from_sub( $joined, $plan_id ) {
 

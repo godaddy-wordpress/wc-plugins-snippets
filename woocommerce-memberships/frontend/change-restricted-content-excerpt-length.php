@@ -7,9 +7,9 @@
  * This could let you remove the message HTML to add your own, adjust the excerpt or
  * displayed content, or conditionally change restricted views for certain posts
  */
- 
 
-/** 
+
+/**
  * Example of adjusting restricted content (v1.6.0+)
  * 	Changes excerpts to use 120 words instead of WordPress default
  *
@@ -21,11 +21,10 @@
  */
 function sv_wc_memberships_filter_restricted_content( $content, $restricted, $message, $post ) {
 
-   if ( true === $restricted ) {
+	if ( true === $restricted ) {
+		return wp_trim_words( $content, 120 ) . $message;
+	}
 
-      return wp_trim_words( $content, 120 ) . $message ; 
-   }
-
-   return $content; 
-} 
+	return $content;
+}
 add_filter( 'wc_memberships_the_restricted_content', 'sv_wc_memberships_filter_restricted_content', 10, 4 );

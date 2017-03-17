@@ -4,13 +4,13 @@
  * Example: Add a heading above the calculator section
  */
 function sv_wc_measurement_price_calculator_heading() {
+	global $product;
 
 	// bail if MPC isn't active
 	if ( ! class_exists( 'WC_Price_Calculator_Product' ) ) {
 		return;
 	}
 
-	global $product;
 	$measurement = WC_Price_Calculator_Product::calculator_enabled( $product );
 
 	// if the calculator is enabled, add the heading

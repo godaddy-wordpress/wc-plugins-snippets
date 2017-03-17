@@ -10,10 +10,10 @@
  * @return int The number of decimal places
  */
 function sv_wc_measurement_price_calculator_change_measurement_precision() {
-
 	return 2;
 }
 add_filter( 'wc_measurement_price_calculator_measurement_precision', 'sv_wc_measurement_price_calculator_change_measurement_precision' );
+
 
 /**
  * Round the Measurement Price Calculator total measurement on the cart page to

@@ -8,6 +8,6 @@
  * @return string $title the updated heading text
  */
 function sv_wc_memberships_members_area_section_title( $title ) {
-    return __( 'Exclusive Discounts', 'your-textdomain' );
+	return __( 'Exclusive Discounts', 'your-textdomain' );
 }
 add_filter( 'wc_memberships_members_area_my_membership_discounts_title', 'sv_wc_memberships_members_area_section_title' );

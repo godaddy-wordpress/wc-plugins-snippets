@@ -42,7 +42,6 @@ add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_add_
 function sv_wc_csv_export_add_product_to_order_line_item( $line_item, $_, $product ) {
 
 	$line_item['product'] = $product;
-
 	return $line_item;
 }
 add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_add_product_to_order_line_item', 10, 3 );

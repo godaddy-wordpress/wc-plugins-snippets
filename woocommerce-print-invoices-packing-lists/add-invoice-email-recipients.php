@@ -7,7 +7,7 @@
  * @return string $recipient the updated list of email recipients
  */
 function sv_wc_pip_invoice_email_recipient( $recipient, $document ) {
-		
+
 	$recipient .= ', warehouse-manager@example.com, admin@example.com';
 	return $recipient;
 }

@@ -7,14 +7,14 @@
  * @param \WC_Memberships_User_Membership $user_membership User Membership object
  * @return array $actions the updated array of actions
  */
- 
+
 function sv_wc_memberships_edit_my_memberships_actions( $actions, $user_membership ) {
-	
+
 	// we could check the plan slug if you only want to unset this for certain memberships
-	// if ( 'silver' !== $user_membership->get_plan()->get_slug() ) { 
-	//	return $actions; 
+	// if ( 'silver' !== $user_membership->get_plan()->get_slug() ) {
+	//	return $actions;
 	// }
-	
+
 	unset( $actions['renew'] );
 	return $actions;
 }

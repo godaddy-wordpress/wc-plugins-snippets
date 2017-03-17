@@ -9,11 +9,11 @@
  */
 function sv_wc_memberships_rename_member_area_sections( $sections ) {
 
-    $sections['my-membership-content'] = __( 'Club Articles', 'my-text-domain' );
-    $sections['my-membership-products'] = __( 'Club Products', 'my-text-domain' );
-    $sections['my-membership-discounts'] = __( 'Exclusive Discounts', 'my-text-domain' );
-    $sections['my-membership-notes'] = __( 'Notes from MySite', 'my-text-domain' );
+	$sections['my-membership-content']   = __( 'Club Articles', 'my-text-domain' );
+	$sections['my-membership-products']  = __( 'Club Products', 'my-text-domain' );
+	$sections['my-membership-discounts'] = __( 'Exclusive Discounts', 'my-text-domain' );
+	$sections['my-membership-notes']     = __( 'Notes from MySite', 'my-text-domain' );
 
-    return $sections;
+	return $sections;
 }
 add_filter( 'wc_membership_plan_members_area_sections', 'sv_wc_memberships_rename_member_area_sections' );

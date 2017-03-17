@@ -1,8 +1,12 @@
-<?php
+<?php // only copy if needed
+
 /**
  * Sort pickup locations alphabetically when shown to customers
+ *
+ * NOTE: This is not needed with Local Pickup Plus 2.0+!
+ * Please use the "location sorting" setting instead.
  */
- 
+
 
 /**
  * Helper sorting function
@@ -23,6 +27,5 @@ function sv_wc_local_pickup_plus_alphabetize_locations( $locations ) {
 
 	usort( $locations, 'wc_lpp_sort_locations' );
 	return $locations;
-
 }
 add_filter( 'option_woocommerce_pickup_locations', 'sv_wc_local_pickup_plus_alphabetize_locations' );

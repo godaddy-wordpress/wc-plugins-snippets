@@ -31,7 +31,6 @@ function sv_wc_customer_csv_export_column_headers( $column_headers ) {
 		// Adds new column after 'last_name' column
 		if ( 'last_name' === $key ) {
 			$new_headers['role'] = 'role';
-
 		}
 	}
 

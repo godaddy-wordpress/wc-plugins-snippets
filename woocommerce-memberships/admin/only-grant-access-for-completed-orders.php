@@ -10,6 +10,5 @@ function sv_wc_memberships_remove_processing_access() {
 	if ( function_exists( 'wc_memberships' ) ) {
 		remove_action( 'woocommerce_order_status_processing', array( wc_memberships(), 'grant_membership_access' ), 11 );
 	}
-
 }
 add_action( 'init', 'sv_wc_memberships_remove_processing_access' );

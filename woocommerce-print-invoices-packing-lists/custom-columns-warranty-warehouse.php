@@ -14,10 +14,9 @@ function sv_wc_pip_document_table_headers( $table_headers, $order_id, $type ) {
 	if ( 'invoice' === $type ) {
 
 		$table_headers['warranty'] = 'Warranty';
-	}
 
 	// add custom columns for packing and pick lists
-	elseif ( 'packing-list' === $type || 'pick-list' === $type ) {
+	} elseif ( 'packing-list' === $type || 'pick-list' === $type ) {
 
 		$table_headers['warehouse_location'] = 'Warehouse';
 	}
