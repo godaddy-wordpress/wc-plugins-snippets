@@ -18,10 +18,9 @@ function sv_wc_checkout_add_ons_remove_add_ons_for_giftboxes() {
 	foreach ( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
 
 		$product = $cart_item['data'];
-		$product_in_cat = false;
 
 		// replace 'gift_box' with your category's slug
-		if ( has_term( 'gift_box', 'product_cat', $product->id ) ) {
+		if ( has_term( 'gift_box', 'product_cat', $product->get_id() ) ) {
 			// flag the cart as containing this category, we only need one "true" to break
 			$cat_check = true;
 			break;

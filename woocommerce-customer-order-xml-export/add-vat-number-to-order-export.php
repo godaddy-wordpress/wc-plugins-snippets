@@ -1,6 +1,11 @@
 <?php // only copy this line if needed
 
 /**
+ * NOTE: This is not needed for the AvaTax plugin, as it will add VAT ID automatically to order / customer exports.
+ */
+
+
+/**
  * Add `VATNumber` tag
  *
  * REQUIRES v2.0+ of XML Export; earlier versions should use the `wc_customer_order_xml_export_suite_order_export_order_list_format` filter
@@ -39,19 +44,19 @@ add_filter( 'wc_customer_order_xml_export_suite_order_data', 'sv_wc_xml_export_a
 function sv_wc_xml_export_vat_number_data( $order ) {
 
 	$vat_number = '';
+	$order_id   = is_callable( array( $order, 'get_id' ) ) ? $order->get_id() : $order->id;
 
 	// find VAT number if one exists for the order
 	$vat_number_meta_keys = array(
 		'_vat_number',               // EU VAT number
 		'VAT Number',                // Legacy EU VAT number
 		'vat_number',                // Taxamo
-		'_billing_wc_avatax_vat_id', // AvaTax
 	);
 
 	foreach ( $vat_number_meta_keys as $meta_key ) {
 
-		if ( metadata_exists( 'post', $order->id, $meta_key ) ) {
-			return get_post_meta( $order->id, $meta_key, true );
+		if ( metadata_exists( 'post', $order_id, $meta_key ) ) {
+			return get_post_meta( $order_id, $meta_key, true );
 		}
 	}
 

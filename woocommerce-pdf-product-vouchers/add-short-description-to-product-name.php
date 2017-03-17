@@ -16,9 +16,14 @@ function sv_wc_pdf_vouchers_add_product_description( $name, $voucher ) {
 		return $name . ' - product short description';
 	}
 
-	$product = $order->get_product_from_item( $voucher->get_item() );
+	// Account for PDF Vouchers 2.x and 3.x
+	$voucher_item = is_callable( array( $voucher, 'get_order_item' ) ) ? $voucher->get_order_item() : $voucher->get_item();
 
-	if ( $product && $short_description = $product->get_post_data()->post_excerpt ) {
+	// TODO: this method will likely be deprecated at some point after WC 3.0 {BR 2017-03-17}
+	// replace it with $item->get_product() if callable in the future
+	$product = $order->get_product_from_item( $voucher_item );
+
+	if ( $product && $short_description = get_post( $product->get_id() )->post_excerpt ) {
 		$name .= ' - ' . $short_description;
 	}
 

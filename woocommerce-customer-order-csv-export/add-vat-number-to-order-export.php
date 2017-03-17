@@ -1,6 +1,11 @@
 <?php // only copy this line if needed
 
 /**
+ * NOTE: This is not needed for the AvaTax plugin, as it will add VAT ID automatically to order / customer exports.
+ */
+
+
+/**
  * Add `vat_number` column header
  *
  * @param array $column_headers the original column headers
@@ -41,18 +46,20 @@ function sv_wc_csv_export_modify_row_data_vat_number( $order_data, $order, $csv_
 	$vat_number     = '';
 	$new_order_data = array();
 
+	// compat for pre / post WC 3.0
+	$order_id = is_callable( array( $order, 'get_id' ) ) ? $order->get_id() : $order->id;
+
 	// find VAT number if one exists for the order
 	$vat_number_meta_keys = array(
 		'_vat_number',               // EU VAT number
 		'VAT Number',                // Legacy EU VAT number
 		'vat_number',                // Taxamo
-		'_billing_wc_avatax_vat_id', // AvaTax
 	);
 
 	foreach ( $vat_number_meta_keys as $meta_key ) {
 
-		if ( metadata_exists( 'post', $order->id, $meta_key ) ) {
-			$vat_number = get_post_meta( $order->id, $meta_key, true );
+		if ( metadata_exists( 'post', $order_id, $meta_key ) ) {
+			$vat_number = get_post_meta( $order_id, $meta_key, true );
 			break;
 		}
 	}

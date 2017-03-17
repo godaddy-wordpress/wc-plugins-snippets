@@ -22,7 +22,7 @@ function sv_wc_checkout_add_ons_remove_add_ons_only_giftboxes() {
 		$product = $cart_item['data'];
 
 		// replace 'gift_box' with your category's slug
-		$product_in_cat = has_term( 'gift_box', 'product_cat', $product->id ) ? true : false;
+		$product_in_cat = has_term( 'gift_box', 'product_cat', $product->get_id() ) ? true : false;
 
 		array_push( $category_checks, $product_in_cat );
 	}

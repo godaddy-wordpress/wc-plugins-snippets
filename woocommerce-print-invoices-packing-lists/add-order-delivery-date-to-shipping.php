@@ -18,7 +18,8 @@ function sv_wc_pip_add_order_delivery_shipping( $shipping, $document_type, $orde
 		return $shipping;
 	}
 
-	$delivery_date = get_post_meta( $order->id, '_delivery_date', true );
+	$order_id      = is_callable( array( $order, 'get_id' ) ) ? $order->get_id() : $order->id;
+	$delivery_date = get_post_meta( $order_id, '_delivery_date', true );
 
 	if ( $delivery_date ) {
 		$delivery_date_i18n = wc_od_localize_date( $delivery_date );

@@ -21,12 +21,12 @@
  *
  * @param array $item_format line item XML data to write
  * @param \WC_Order $order
- * @param array $item the line item order data
+ * @param array|\WC_Order_Item $item the line item order data or object (WC 3.0+)
  * @return array - modified line item XML data to write
  */
 function sv_wc_xml_export_line_item_addons( $item_format, $order, $item ) {
 
-	$product = $order->get_product_from_item( $item );
+	$product = is_callable( array( $item, 'get_product' ) ) ? $item->get_product() : $order->get_product_from_item( $item );
 
 	// bail if this line item isn't a product
 	if ( ! ( $product && $product->exists() ) ) {
@@ -34,7 +34,7 @@ function sv_wc_xml_export_line_item_addons( $item_format, $order, $item ) {
 	}
 
 	// get the possible add-ons for this line item to check if they're in the order
-	$addons         = get_product_addons( $product->id );
+	$addons         = get_product_addons( $product->get_id() );
 	$product_addons = sv_wc_xml_export_get_line_item_addons( $item, $addons );
 
 	if ( ! empty( $product_addons ) ) {

@@ -14,12 +14,13 @@
  */
 function sv_wc_csv_export_order_line_item_id( $line_item, $item, $product ) {
 
-	$line_item['item_id']      = $product->id;
+	$line_item['item_id']      = $product->get_id();
 	$line_item['variation_id'] = '';
 
 	// set the variation id for variable products
 	if ( $product->is_type( 'variation' ) ) {
-		$line_item['variation_id'] = $product->get_variation_id();
+		$line_item['item_id']      = $product->get_parent_id();
+		$line_item['variation_id'] = $product->get_id();
 	}
 
 	return $line_item;
@@ -31,7 +32,7 @@ add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_or
  * Add `item_id` and `variation_id` column headers to the export format
  *
  * @param array  $column_headers the original column headers
- * @param WC_Customer_Order_CSV_Export_Generator $csv_generator the generator instance
+ * @param \WC_Customer_Order_CSV_Export_Generator $csv_generator the generator instance
  * @return array $column_headers the updated headers
  */
 function sv_wc_csv_export_modify_column_headers_item_id( $column_headers, $csv_generator ) {
