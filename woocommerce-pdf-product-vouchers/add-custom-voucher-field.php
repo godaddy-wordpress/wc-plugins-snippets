@@ -45,6 +45,7 @@ add_filter( 'wc_pdf_product_vouchers_voucher_fields', 'sv_wc_pdf_vouchers_vouche
  *  from voucher post meta ( get_post_meta( $voucher_id, '_' . $field_id, true ) )
  *
  * @param mixed $value the field value
+ * @param \WC_Voucher $voucher the voucher object
  * @return mixed the updated field value
  */
 function sv_wc_pdf_vouchers_product_weight_value( $value, $voucher ) {
