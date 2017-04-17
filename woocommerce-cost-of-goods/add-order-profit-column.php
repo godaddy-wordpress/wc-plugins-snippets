@@ -17,9 +17,7 @@ function sv_wc_cogs_add_order_profit_column_header( $columns ) {
 		$new_columns[ $column_name ] = $column_info;
 
 		if ( 'order_total' === $column_name ) {
-
-			$label = __( 'Profit', 'my-textdomain' );
-			$new_columns['order_profit'] = $label;
+			$new_columns['order_profit'] = __( 'Profit', 'my-textdomain' );
 		}
 	}
 
@@ -41,11 +39,14 @@ function sv_wc_cogs_add_order_profit_column_content( $column ) {
 		$order    = wc_get_order( $post->ID );
 		$currency = is_callable( array( $order, 'get_currency' ) ) ? $order->get_currency() : $order->order_currency;
 		$profit   = '';
-		$cost     = (float) sv_helper_get_order_meta( $order, '_wc_cog_order_total_cost' );
+		$cost     = sv_helper_get_order_meta( $order, '_wc_cog_order_total_cost' );
 		$total    = (float) $order->get_total();
 
 		// don't check for empty() since cost can be '0'
 		if ( '' !== $cost || false !== $cost ) {
+
+			// now we can cast cost since we've ensured it was calculated for the order
+			$cost   = (float) $cost;
 			$profit = $total - $cost;
 		}
 
@@ -86,6 +87,7 @@ if ( ! function_exists( 'sv_helper_get_order_meta' ) ) :
 
 		} else {
 
+			// have the $order->get_id() check here just in case the WC_VERSION isn't defined correctly
 			$order_id = is_callable( array( $order, 'get_id' ) ) ? $order->get_id() : $order->id;
 			$value    = get_post_meta( $order_id, $key, $single );
 		}
