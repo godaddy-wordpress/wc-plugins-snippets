@@ -12,6 +12,7 @@
  * @param string $action Either 'create' or 'merge' (update) a user membership; unused
  * @param array $columns CSV columns raw data
  * @param array $row CSV row raw data
+ * @return array updated import data
  */
 function sv_wc_memberships_modify_import_data( $import_data, $_, $columns, $row ) {
 
