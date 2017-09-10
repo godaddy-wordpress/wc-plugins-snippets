@@ -14,14 +14,13 @@ function sv_wc_memberships_add_memberships_to_admin_email( $order, $sent_to_admi
 		return;
 	}
 
-	// be sure the person was logged in rather than getting WP_User by email
+	// be sure the person was logged in rather than getting WP_User by billing email
 	$user_id = $order->get_user_id();
 
 	// ignore guest purchases since they wouldn't leverage member perks
 	if ( $user_id ) {
 
-		$statuses    = array( 'active', 'complimentary', 'pending', 'free_trial' );
-		$memberships = wc_memberships()->get_user_memberships_instance()->get_user_memberships( $user_id, array( 'status' => $statuses ) );
+		$memberships = wc_memberships_get_user_active_memberships( $user_id );
 
 		if ( ! empty( $memberships ) ) {
 
@@ -30,6 +29,7 @@ function sv_wc_memberships_add_memberships_to_admin_email( $order, $sent_to_admi
 			foreach ( $memberships as $membership ) {
 
 				$plan = $membership->get_plan();
+
 				printf( '<a href="%1$s">%2$s</a><br />',
 					admin_url( "post.php?post={$membership->id}&action=edit" ),
 					$plan->get_name()
