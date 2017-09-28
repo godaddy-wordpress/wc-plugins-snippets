@@ -1,8 +1,10 @@
 <?php // only copy this line if needed
 
 /**
- * Changes "My Discounts" header to "Exclusive Discounts"
- * Every Member Area section header can be changed in a similar fashion
+ * v1.9+: Changes the navigation title of the members area section
+ * For example, show "Exclusive Discounts" instead of "Discounts"
+ *
+ * < v1.9: Changes the section header
  *
  * @param string $title the heading text for the member area section
  * @return string $title the updated heading text

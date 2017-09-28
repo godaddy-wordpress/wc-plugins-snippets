@@ -11,8 +11,8 @@ function sv_wc_memberships_grant_access_for_custom_order_statuses() {
 
 	// bail if Memberships is not active
 	if ( function_exists( 'wc_memberships' ) ) {
-		add_action( 'woocommerce_order_status_shipped', array( wc_memberships(), 'grant_membership_access' ), 11 );
-		add_action( 'woocommerce_order_status_invoice-paid', array( wc_memberships(), 'grant_membership_access' ), 11 );
+		add_action( 'woocommerce_order_status_shipped', array( wc_memberships()->get_plans_instance(), 'grant_access_to_membership_from_order' ), 11 );
+		add_action( 'woocommerce_order_status_invoice-paid', array( wc_memberships()->get_plans_instance(), 'grant_access_to_membership_from_order' ), 11 );
 	}
 
 }

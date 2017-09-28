@@ -1,6 +1,14 @@
 <?php // only copy if needed
 
 /**
+ * IF USING MEMBERSHIPS 1.7+
+ * This snippet is likely not needed, you can set up a plan to grant access at registration
+ *
+ * However, this shows usage of programmatic membership creation for developers.
+ */
+
+
+/**
  * Programmatically create a user membership
  * Example: automatically grant membership access to a plan at WP user registration
  * Requires Memberships 1.3+
@@ -26,6 +34,5 @@ function sv_wc_memberships_user_membership_at_registration( $user_id ) {
 	// Optional: get the new membership and add a note so we know how this was registered.
 	$user_membership = wc_memberships_get_user_membership( $user_id, $args['plan_id'] );
 	$user_membership->add_note( 'Membership access granted automatically from registration.' );
-
 }
 add_action( 'user_register', 'sv_wc_memberships_user_membership_at_registration', 15 );

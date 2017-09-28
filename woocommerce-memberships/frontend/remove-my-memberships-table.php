@@ -1,6 +1,13 @@
 <?php // Only copy this line if needed
 
 /**
+ * THIS IS NOT NEEDED as of version 1.9
+ *
+ * You can delete the "My Memberships" account endpoint setting to remove this
+ */
+
+
+/**
  * Removes the "My Memberships" table from my account area
  */
 function sv_remove_my_memberships_table() {

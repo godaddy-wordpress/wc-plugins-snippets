@@ -15,13 +15,8 @@ function sv_wc_memberships_change_member_product_price_display( $price ) {
 		return;
 	}
 
-	// get any active user memberships (requires Memberships 1.4+)
-	$user_id = get_current_user_id();
-	$args = array(
-		'status' => array( 'active', 'complimentary', 'pending' ),
-	);
-
-	$active_memberships = wc_memberships_get_user_memberships( $user_id, $args );
+	// get any active user memberships (requires Memberships 1.7+)
+	$active_memberships = wc_memberships_get_user_active_memberships();
 
 	// only proceed if the user has no active memberships
 	if ( empty( $active_memberships ) ) {
@@ -34,5 +29,5 @@ function sv_wc_memberships_change_member_product_price_display( $price ) {
 
 	return $price;
 }
-add_filter( 'woocommerce_get_price_html', 'sv_wc_memberships_change_member_product_price_display' );
+add_filter( 'woocommerce_get_price_html',  'sv_wc_memberships_change_member_product_price_display' );
 add_filter( 'woocommerce_cart_item_price', 'sv_wc_memberships_change_member_product_price_display' );

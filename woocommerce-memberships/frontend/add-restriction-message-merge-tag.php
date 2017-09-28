@@ -1,8 +1,7 @@
 <?php // only copy if needed
 
-
 /**
- * Complete snippet will allow for replacing a {plan_names} merge tag in product restricted
+ * This complete snippet will allow for replacing a {plan_names} merge tag in product restricted
  *  messages with a human-readable list of plans names that restrict the product
  *
  * See: http://skyver.ge/5U
@@ -30,29 +29,33 @@ add_filter( 'wc_memberships_product_purchasing_restricted_message', 'edit_purcha
 add_filter( 'wc_memberships_product_viewing_restricted_message',    'edit_purchasing_restricted_message', 10, 2 );
 
 
-/**
- * Creates a human-readable (Oxford comma) list from an array
- *
- * @param array $items the array of items to turn into a list
- * @param string $glue the string that should separate items in the list
- * @param string $last the string that should appear between final list items
- * @return string a human-readable list of the items
- */
-function sv_get_readable_list( $items, $glue = ', ', $last = ' or ' ) {
+if ( ! function_exists( 'sv_get_readable_list' ) ) :
 
-	// optional: bold the text for each value
-	// foreach ( $items as $key => $value ) {
-	//	$items[ $key ] = '<strong>' . $value . '</strong>';
-	// }
+	/**
+	 * Creates a human-readable (Oxford comma) list from an array
+	 *
+	 * @param array $items the array of items to turn into a list
+	 * @param string $glue the string that should separate items in the list
+	 * @param string $last the string that should appear between final list items
+	 * @return string a human-readable list of the items
+	 */
+	function sv_get_readable_list( $items, $glue = ', ', $last = ' or ' ) {
 
-	if ( count( $items ) > 1 ) {
-		$last_element = array_pop( $items );
-		array_push( $items, $last . $last_element );
+		// optional: bold the text for each value
+		// foreach ( $items as $key => $value ) {
+		//	$items[ $key ] = '<strong>' . $value . '</strong>';
+		// }
+
+		if ( count( $items ) > 1 ) {
+			$last_element = array_pop( $items );
+			array_push( $items, $last . $last_element );
+		}
+
+		// don't add the glue unless we have > 2 items
+		return 2 === count( $items ) ? implode( ' ', $items ) : implode( $glue, $items );
 	}
 
-	// don't add the glue unless we have > 2 items
-	return 2 === count( $items ) ? implode( ' ', $items ) : implode( $glue, $items );
-}
+endif;
 
 
 /**
@@ -86,25 +89,21 @@ function sv_wc_memberships_get_plans_for_product( $product_id ) {
 			switch ( $rule->get_content_type_name() ) {
 
 				case 'product_cat':
-
 					// check for at least one match
 					// if we find one, break out of the rules foreach, we're done
 					if ( count( array_intersect( $rule->get_object_ids(), $categories ) ) > 0 ) {
 						$product_plans[ $plan->get_slug() ] = $plan->get_name();
 						break 2;
 					}
-
 				break;
 
 				case 'product':
-
 					// check to see if the product is restricted directly
 					// break completely out if so (this is intentionally not strict)
 					if ( in_array( $product_id, $rule->get_object_ids() ) ) {
 						$product_plans[ $plan->get_slug() ] = $plan->get_name();
 						break 2;
 					}
-
 				break;
 			}
 		}

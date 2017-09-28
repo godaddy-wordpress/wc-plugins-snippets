@@ -19,9 +19,17 @@ function sv_wc_memberships_my_memberships_shortcode() {
 	// buffer contents
 	ob_start();
 
-	?><div class="woocommerce"><?php
-	wc_memberships()->get_frontend_instance()->get_members_area_instance()->my_account_memberships();
-	?></div><?php
+	?>
+	<div class="woocommerce">
+	<h2><?php esc_html_e( 'My Memberships', 'textdomain' ); ?></h2>
+	<?php
+		wc_get_template( 'myaccount/my-memberships.php', array(
+			'customer_memberships' => wc_memberships_get_user_memberships(),
+			'user_id'              => get_current_user_id(),
+		) );
+	?>
+	</div>
+	<?php
 
 	// output buffered content
 	return ob_get_clean();
