@@ -1,13 +1,14 @@
-<?php
+<?php // only copy if needed!
+
+
 /**
- * Add new WooCommerce Twilio message variables
- * Adds shipping method provider and Sequential Order Numbers support
+ * Add new WooCommerce Twilio message variables.
+ * Adds shipping method provider, Sequential Order Numbers support, and customer first name.
  *
  * Can work with any custom order meta as well.
  *
  * @param string $message the SMS message
  * @param \WC_Order $order the order object
- *
  * @return string updated message
  */
 function sv_wc_twilio_sms_variable_replacement( $message, $order ) {
@@ -27,6 +28,9 @@ function sv_wc_twilio_sms_variable_replacement( $message, $order ) {
 
 	// Custom order numbers
 	$message = str_replace( '%order_id%', $order->get_order_number(), $message );
+
+	// Customer first name
+	$message = str_replace( '%first_name%', SV_WC_Order_Compatibility::get_prop( $order, 'billing_first_name' ), $message );
 
 	return $message;
 }
