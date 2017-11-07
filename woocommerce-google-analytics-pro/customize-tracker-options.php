@@ -4,7 +4,7 @@
 /**
  * Allows actors to customize the GA tracker options.
  *
- * For a list of available options, see to https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#create
+ * For a list of available options, see https://developers.google.com/analytics/devguides/collection/analyticsjs/field-reference#create
  *
  * @param array $options tracker options
  */
