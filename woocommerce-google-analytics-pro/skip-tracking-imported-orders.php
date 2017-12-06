@@ -21,4 +21,4 @@ function sv_wc_google_analytics_skip_order_tracking( $do_not_track, $order_id ) 
 
 	return $do_not_track;
 }
-add_filter( 'wc_google_analytics_pro_do_not_track_completed_purchase', '', 10, 2 );
+add_filter( 'wc_google_analytics_pro_do_not_track_completed_purchase', 'sv_wc_google_analytics_skip_order_tracking', 10, 2 );
