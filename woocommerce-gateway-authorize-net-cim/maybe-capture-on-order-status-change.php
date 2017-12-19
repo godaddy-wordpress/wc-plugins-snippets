@@ -10,7 +10,7 @@
 function sv_wc_authorize_net_cim_maybe_process_capture( $order_id, $order ) {
 
 	// quick check
-	if ( ! $order instanceof WC_Order ) {
+	if ( ! $order instanceof WC_Order || ! function_exists( 'wc_authorize_net_cim' ) ) {
 		return;
 	}
 
