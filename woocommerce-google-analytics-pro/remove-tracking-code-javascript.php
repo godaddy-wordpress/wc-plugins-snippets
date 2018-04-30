@@ -2,6 +2,23 @@
 
 /**
  * Remove the tracking code added by WooCommerce Google Analytics Pro
+ * This is usefull if your theme or another plugin is adding the tracking code
+ * and you wish to use that instead
+ *
+ * Requires at least v1.5.1 of Google Analytics Pro
+ */
+add_filter( 'wc_google_analytics_pro_remove_tracking_code', '__return_true' );
+
+
+
+// OR
+
+
+
+/**
+ * IMPORTANT NOTE: Use this only if you're running a version older than v1.5.1
+ *
+ * Remove the tracking code added by WooCommerce Google Analytics Pro
  * - this is usefull if your theme or another plugin is adding the tracking code
  * - and you wish to use that instead
  */
