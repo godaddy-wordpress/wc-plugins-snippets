@@ -22,7 +22,7 @@ function sv_wc_memberships_my_content_table_add_column( $columns ) {
 
 	return $new_columns;
 }
-add_filter( 'wc_memberships_members_area_my_membership_content_column_names', 'sv_members_area_content_table_columns', 11 );
+add_filter( 'wc_memberships_members_area_my_membership_content_column_names', 'sv_wc_memberships_my_content_table_add_column', 11 );
 
 
 /**
@@ -30,9 +30,9 @@ add_filter( 'wc_memberships_members_area_my_membership_content_column_names', 's
  *
  * @param \WP_Post $post the post object used for the row's display
  */
-function sv_members_area_content_author( $post ) {
+function sv_wc_memberships_my_content_table_add_column_content( $post ) {
 
 	$author = get_user_by( 'ID', $post->post_author );
 	echo $author->display_name;
 }
-add_action( 'wc_memberships_members_area_my_membership_content_column_membership-content-author', 'sv_wc_memberships_my_content_table_add_column' );
+add_action( 'wc_memberships_members_area_my_membership_content_column_membership-content-author', 'sv_wc_memberships_my_content_table_add_column_content' );
