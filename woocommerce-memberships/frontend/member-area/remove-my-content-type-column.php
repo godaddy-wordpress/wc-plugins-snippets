@@ -3,7 +3,7 @@
 /**
  * Remove the "Type" column from the My Content section of the member area
  *
- * @param array $columns the columsn in the "My Content" table
+ * @param array $columns the columns in the "My Content" table
  * @return array $columns the updated array of columns
  */
 function sv_wc_memberships_my_content_table_columns( $columns ) {
