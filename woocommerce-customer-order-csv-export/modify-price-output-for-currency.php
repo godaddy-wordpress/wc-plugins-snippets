@@ -16,7 +16,7 @@ function sv_wc_csv_export_localize_price_columns( $order_data, $order, $generato
 
 	list( $fee_total, $fee_tax_total ) = sv_wc_calculate_fee_total( $order );
 
-	$price_columns = array(
+	$price_data = array(
 		'shipping_total'     => $order->get_shipping_total(),
 		'shipping_tax_total' => $order->get_shipping_tax(),
 		'fee_total'          => $fee_total,
@@ -31,18 +31,14 @@ function sv_wc_csv_export_localize_price_columns( $order_data, $order, $generato
 
 		foreach ( $order_data as $line => $data ) {
 
-			foreach ( $price_columns as $column_key => $column_value ) {
+			foreach ( $price_data as $column_key => $column_value ) {
 				$order_data[ $line ][ $column_key ] = number_format( $column_value, $decimals, $decimal_separator, $thousand_separator );
 			}
 		}
 
 	} else {
 
-		// localize price for pricing cell in the row
-		foreach ( $price_columns as $column_key => $column_value ) {
-
-			$order_data[ $column_key ] = number_format( $column_value, $decimals, $decimal_separator, $thousand_separator );
-		}
+		$order_data = sv_wc_customer_order_csv_export_localize_prices( $order_data, $price_data );
 	}
 
 	return $order_data;
@@ -62,10 +58,6 @@ add_filter( 'wc_customer_order_csv_export_order_row', 'sv_wc_csv_export_localize
  */
 function sv_wc_csv_export_localize_price_items_columns_line_item( $item_data, $item, $product, $order ) {
 
-	$decimals           = wc_get_price_decimals();
-	$decimal_separator  = wc_get_price_decimal_separator();
-	$thousand_separator = wc_get_price_thousand_separator();
-
 	$price_data = array(
 		'subtotal'     => $order->get_line_subtotal( $item ),
 		'subtotal_tax' => $item['line_subtotal_tax'],
@@ -74,15 +66,7 @@ function sv_wc_csv_export_localize_price_items_columns_line_item( $item_data, $i
 		'refunded'     => $order->get_total_refunded_for_item( $item->get_id() ),
 	);
 
-	// localize price for each piece of price data
-	foreach ( $price_data as $data_key => $data_value ) {
-
-		if ( isset( $item_data[ $data_key ] ) ) {
-			$item_data[ $data_key ] = number_format( $data_value, $decimals, $decimal_separator, $thousand_separator );
-		}
-	}
-
-	return $item_data;
+	return sv_wc_customer_order_csv_export_localize_prices( $item_data, $price_data );
 }
 add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_localize_price_items_columns_line_item', 10, 4 );
 
@@ -97,24 +81,12 @@ add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_lo
  */
 function sv_wc_csv_export_localize_price_items_columns_fee_item( $item_data, $fee, $order ) {
 
-	$decimals           = wc_get_price_decimals();
-	$decimal_separator  = wc_get_price_decimal_separator();
-	$thousand_separator = wc_get_price_thousand_separator();
-
 	$price_data = array(
 		'total'        => $order->get_line_total( $fee ),
 		'total_tax'    => $order->get_line_tax( $fee ),
 	);
 
-	// localize price for each piece of price data
-	foreach ( $price_data as $data_key => $data_value ) {
-
-		if ( isset( $item_data[ $data_key ] ) ) {
-			$item_data[ $data_key ] = number_format( $data_value, $decimals, $decimal_separator, $thousand_separator );
-		}
-	}
-
-	return $item_data;
+	return sv_wc_customer_order_csv_export_localize_prices( $item_data, $price_data );
 }
 add_filter( 'wc_customer_order_csv_export_order_fee_item',  'sv_wc_csv_export_localize_price_items_columns_fee_item', 10, 3 );
 
@@ -129,23 +101,11 @@ add_filter( 'wc_customer_order_csv_export_order_fee_item',  'sv_wc_csv_export_lo
  */
 function sv_wc_csv_export_localize_price_items_columns_shipping_item( $item_data, $shipping ) {
 
-	$decimals           = wc_get_price_decimals();
-	$decimal_separator  = wc_get_price_decimal_separator();
-	$thousand_separator = wc_get_price_thousand_separator();
-
 	$price_data = array(
 		'total' => $shipping->get_total(),
 	);
 
-	// localize price for each piece of price data
-	foreach ( $price_data as $data_key => $data_value ) {
-
-		if ( isset( $item_data[ $data_key ] ) ) {
-			$item_data[ $data_key ] = number_format( $data_value, $decimals, $decimal_separator, $thousand_separator );
-		}
-	}
-
-	return $item_data;
+	return sv_wc_customer_order_csv_export_localize_prices( $item_data, $price_data );
 }
 add_filter( 'wc_customer_order_csv_export_order_shipping_item', 'sv_wc_csv_export_localize_price_items_columns_shipping_item', 10, 2 );
 
@@ -160,23 +120,11 @@ add_filter( 'wc_customer_order_csv_export_order_shipping_item', 'sv_wc_csv_expor
  */
 function sv_wc_csv_export_localize_price_items_columns_tax_item( $item_data, $tax ) {
 
-	$decimals           = wc_get_price_decimals();
-	$decimal_separator  = wc_get_price_decimal_separator();
-	$thousand_separator = wc_get_price_thousand_separator();
-
 	$price_data = array(
 		'total' => $tax->amount,
 	);
 
-	// localize price for each piece of price data
-	foreach ( $price_data as $data_key => $data_value ) {
-
-		if ( isset( $item_data[ $data_key ] ) ) {
-			$item_data[ $data_key ] = number_format( $data_value, $decimals, $decimal_separator, $thousand_separator );
-		}
-	}
-
-	return $item_data;
+	return sv_wc_customer_order_csv_export_localize_prices( $item_data, $price_data );
 }
 add_filter( 'wc_customer_order_csv_export_order_tax_item', 'sv_wc_csv_export_localize_price_items_columns_tax_item', 10, 2 );
 
@@ -231,6 +179,36 @@ function sv_wc_calculate_fee_total( $order ) {
 	}
 
 	return array( $fee_total, $fee_tax_total );
+}
+
+endif;
+
+
+if ( ! function_exists( 'sv_wc_customer_order_csv_export_localize_prices' ) ) :
+
+/**
+ * Helper function to loaclize the required totals
+ *
+ * @param array $column_data associative array of order or item data from the CSV
+ * @param array $price_data associative array of the totals to localize
+ * @return array the updated order or item data
+ */
+
+function sv_wc_customer_order_csv_export_localize_prices( $column_data, $price_data ) {
+
+	$decimals           = wc_get_price_decimals();
+	$decimal_separator  = wc_get_price_decimal_separator();
+	$thousand_separator = wc_get_price_thousand_separator();
+
+	// localize price for each piece of price data
+	foreach ( $price_data as $data_key => $data_value ) {
+
+		if ( isset( $column_data[ $data_key ] ) ) {
+			$column_data[ $data_key ] = number_format( $data_value, $decimals, $decimal_separator, $thousand_separator );
+		}
+	}
+
+	return $column_data;
 }
 
 endif;
