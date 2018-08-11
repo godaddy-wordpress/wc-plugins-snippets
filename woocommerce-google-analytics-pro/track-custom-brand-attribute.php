@@ -24,7 +24,6 @@ function sv_wc_google_analytics_pro_product_impression_data_brand_attribute( $da
 }
 add_filter( 'wc_google_analytics_pro_product_details_data',       'sv_wc_google_analytics_pro_product_impression_data_brand_attribute', 10, 2 );
 add_filter( 'wc_google_analytics_pro_product_impression_data',    'sv_wc_google_analytics_pro_product_impression_data_brand_attribute', 10, 2 );
-add_filter( 'wc_google_analytics_pro_api_ec_checkout_parameters', 'sv_wc_google_analytics_pro_product_impression_data_brand_attribute', 10, 2 );
 
 
 /**
@@ -46,3 +45,4 @@ function sv_wc_google_analytics_pro_api_ec_purchase_parameters_brand_attribute( 
 	return $params;
 }
 add_filter( 'wc_google_analytics_pro_api_ec_purchase_parameters', 'sv_wc_google_analytics_pro_api_ec_purchase_parameters_brand_attribute', 10, 2 );
+add_filter( 'wc_google_analytics_pro_api_ec_checkout_parameters', 'sv_wc_google_analytics_pro_api_ec_purchase_parameters_brand_attribute', 10, 2 );
