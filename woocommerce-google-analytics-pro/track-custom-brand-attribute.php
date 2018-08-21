@@ -33,6 +33,8 @@ add_filter( 'wc_google_analytics_pro_product_impression_data',    'sv_wc_google_
  */
 function sv_wc_google_analytics_pro_api_ec_purchase_parameters_brand_attribute( $params, $order ) {
 
+	$count = 0;
+
 	foreach ( $order->get_items() as $item ) {
 
 		$count++;
