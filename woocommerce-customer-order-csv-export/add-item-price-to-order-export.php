@@ -18,13 +18,25 @@ function sv_wc_csv_export_order_line_item_price( $line_item, $item, $product ) {
 
 	$new_line_item = array();
 
-	foreach( $line_item as $key => $data ) {
+	foreach ( $line_item as $key => $data ) {
 
 		$new_line_item[ $key ] = $data;
 
+		// get price of item paid
+		if ( $item->get_quantity() > 0 ) {
+
+			$price = $item->get_subtotal() / $item->get_quantity();
+
+		} else {
+			// this should never happen ¯\_(ツ)_/¯
+
+			$price = $product instanceof WC_Product ? $product->get_price() : 0;
+		}
+
+
 		// add this in the JSON / pipe-format after the SKU
 		if ( 'sku' === $key ) {
-			$new_line_item['price'] = wc_format_decimal( $product->get_price(), 2 );
+			$new_line_item['price'] = wc_format_decimal( $price, 2 );
 		}
 	}
 
