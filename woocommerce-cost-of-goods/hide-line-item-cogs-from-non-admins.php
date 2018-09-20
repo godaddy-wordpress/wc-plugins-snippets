@@ -17,5 +17,8 @@ function sv_wc_cog_hide_line_item_cogs_from_non_admins() {
 
 	// remove cost of goods value and input field from order items
 	remove_action( 'woocommerce_admin_order_item_values', array( wc_cog()->get_admin_instance()->get_orders_instance(), 'add_order_item_cost' ) );
+
+	// remove the order total cost of goods from the order totals section
+	remove_action( 'woocommerce_admin_order_totals_after_total', array( wc_cog()->get_admin_instance()->get_orders_instance(), 'show_order_total_cost' ) );
 }
 add_action( 'admin_init', 'sv_wc_cog_hide_line_item_cogs_from_non_admins' );
