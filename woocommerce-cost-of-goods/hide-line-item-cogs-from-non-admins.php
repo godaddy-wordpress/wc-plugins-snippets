@@ -12,6 +12,9 @@ function sv_wc_cog_hide_line_item_cogs_from_non_admins() {
 		return;
 	}
 
+	// remove COGs settings
+	remove_action( 'woocommerce_inventory_settings', array( wc_cog()->get_admin_instance(), 'add_global_settings' ) );
+
 	// remove the  cost of goods column header from the order items
 	remove_action( 'woocommerce_admin_order_item_headers', array( wc_cog()->get_admin_instance()->get_orders_instance(), 'add_order_item_cost_column_headers' ) );
 
