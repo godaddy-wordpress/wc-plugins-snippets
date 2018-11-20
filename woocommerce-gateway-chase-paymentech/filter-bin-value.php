@@ -3,6 +3,8 @@
 /**
  * Changes the Chase Paymentech BIN to 000001; default is 000002.
  *
+ * Tandem platform typically uses BIN 000002 while Stratus platform uses BIN 000001.
+ *
  * @param string $bin the BIN value; default is 000002
  * @return string updated BIN
  */
