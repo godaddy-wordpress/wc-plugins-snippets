@@ -43,12 +43,8 @@ function sv_wc_cog_hide_costs_from_non_admins() {
 	remove_action( 'woocommerce_product_quick_edit_end',  array( wc_cog()->get_admin_instance()->get_products_instance(), 'render_quick_edit_cost_field' ) );
 	remove_action( 'manage_product_posts_custom_column',  array( wc_cog()->get_admin_instance()->get_products_instance(), 'add_quick_edit_inline_values' ) );
 
-	// remove from Bookings products as well
-	if ( wc_cog()->is_plugin_active( 'woocommmerce-bookings.php' ) || wc_cog()->is_plugin_active( 'woocommerce-bookings.php' ) ) {
-
-		// add cost field to booking products under the 'General' tab
-		remove_action( 'woocommerce_product_options_general_product_data', array( wc_cog()->get_admin_instance()->get_products_instance(), 'add_cost_field_to_booking_product' ) );
-	}
+	// remove cost field from Bookings products
+	remove_action( 'woocommerce_product_options_general_product_data', array( wc_cog()->get_admin_instance()->get_products_instance(), 'add_cost_field_to_booking_product' ) );
 
 	// remove the "Cost" column header next to "Price"
 	remove_filter( 'manage_edit-product_columns', array( wc_cog()->get_admin_instance()->get_products_instance(), 'product_list_table_cost_column_header' ), 11 );
