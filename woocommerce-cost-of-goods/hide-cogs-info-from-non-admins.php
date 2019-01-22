@@ -1,11 +1,11 @@
 <?php // only copy this line if needed
 
 /**
- * Removes the Cost of Goods column from the order line items table for non-admins.
+ * Removes all Cost of Goods information for non-admins.
  * This code will allow you to hide the cost of goods from employees who have
  * access to orders, but the costs will remain visible to administrators.
  */
-function sv_wc_cog_hide_line_item_cogs_from_non_admins() {
+function sv_wc_cog_hide_costs_from_non_admins() {
 
 	// bail if Cost of Goods is deactivated or if logged in user is an admin
 	if ( ! function_exists( 'wc_cog' ) || current_user_can( 'manage_options' )  ) {
@@ -59,4 +59,4 @@ function sv_wc_cog_hide_line_item_cogs_from_non_admins() {
 	// remove reports
 	remove_filter( 'woocommerce_admin_reports', array( wc_cog()->get_admin_reports_instance(), 'add_reports' ) );
 }
-add_action( 'admin_init', 'sv_wc_cog_hide_line_item_cogs_from_non_admins' );
+add_action( 'admin_init', 'sv_wc_cog_hide_costs_from_non_admins' );
