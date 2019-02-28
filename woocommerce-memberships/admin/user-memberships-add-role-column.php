@@ -1,5 +1,6 @@
 <?php // only copy if needed!
 
+
 /**
  * Add a role column to the user memberships list.
  *
