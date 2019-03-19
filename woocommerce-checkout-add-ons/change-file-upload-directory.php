@@ -4,7 +4,7 @@
 /**
  * Changes the default directoy files are uploaded to through the File add-on in Checkout Add-ons.
  *
- * New directory: wp-uploads/checkout_add_ons
+ * New directory: wp-content/uploads/checkout_add_ons
  *
  * @param array $upload_dir array of upload directory data with keys of 'path', 'url', 'subdir, 'basedir', and 'error'.
  * @return array the updated array of upload directoy data
