@@ -29,12 +29,30 @@ add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_modi
  */
 function sv_wc_csv_export_modify_row_data_example( $order_data, $order, $csv_generator ) {
 
-	$new_order_data   = array();
 	$meta_key_example = is_callable( array( $order, 'get_meta' ) ) ? $order->get_meta( 'meta_key_example' ) : $order->meta_key_example;
 
 	$custom_data = array(
 		'example' => $meta_key_example,
 	);
+
+	return sv_wc_csv_export_add_custom_order_data( $order_data, $custom_data );
+}
+add_filter( 'wc_customer_order_csv_export_order_row', 'sv_wc_csv_export_modify_row_data_example', 10, 3 );
+
+
+if ( ! function_exists( 'sv_wc_csv_export_add_custom_order_data' ) ) :
+
+/**
+ * Helper function to add custom order data to CSV Export order data
+ *
+ * @param array $order_data the original column data that may be in One Row per Item format
+ * @param array $custom_data the custom column data being merged into the column data
+ * @param \WC_Customer_Order_CSV_Export_Generator $csv_generator the generator instance
+ * @return array the updated column data
+ */
+function sv_wc_csv_export_add_custom_order_data( $order_data, $custom_data, $csv_generator ) {
+
+	$new_order_data   = array();
 
 	if ( sv_wc_csv_export_is_one_row( $csv_generator ) ) {
 
@@ -48,7 +66,8 @@ function sv_wc_csv_export_modify_row_data_example( $order_data, $order, $csv_gen
 
 	return $new_order_data;
 }
-add_filter( 'wc_customer_order_csv_export_order_row', 'sv_wc_csv_export_modify_row_data_example', 10, 3 );
+
+endif;
 
 
 if ( ! function_exists( 'sv_wc_csv_export_is_one_row' ) ) :
