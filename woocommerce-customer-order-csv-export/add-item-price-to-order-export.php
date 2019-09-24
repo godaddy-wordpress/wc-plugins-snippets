@@ -46,7 +46,7 @@ add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_or
 
 
 /**
- * Add `item_price` column to the Default - One Row per Item export format
+ * Add `item_price` column to "one row per item" export formats
  *
  * @param array $column_headers the original column headers
  * @param WC_Customer_Order_CSV_Export_Generator $csv_generator the generator instance
@@ -54,25 +54,33 @@ add_filter( 'wc_customer_order_csv_export_order_line_item', 'sv_wc_csv_export_or
  */
 function sv_wc_csv_export_modify_column_headers_item_price( $column_headers, $csv_generator ) {
 
-	$new_headers = array();
-
+	// check export format
 	if ( sv_wc_csv_export_is_one_row( $csv_generator ) ) {
 
-		foreach( $column_headers as $key => $column ) {
+		// add after 'item_sku' column if it exists
+		if ( isset( $column_headers['item_sku'] ) ) {
 
-			$new_headers[ $key ] = $column;
+			$new_headers = array();
 
-			// add the item_price after the SKU column
-			if ( 'item_sku' === $key ) {
-				$new_headers['item_price'] = 'item_price';
+			foreach ( $column_headers as $key => $column ) {
+
+				$new_headers[ $key ] = $column;
+
+				// add the item_price after the SKU column
+				if ( 'item_sku' === $key ) {
+					$new_headers['item_price'] = 'item_price';
+				}
 			}
-		}
 
-	} else {
-		return $column_headers;
+			$column_headers = $new_headers;
+
+		// otherwise add column to the end of the headers array
+		} else {
+			$column_headers['item_price'] = 'item_price';
+		}
 	}
 
-	return $new_headers;
+	return $column_headers;
 }
 add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_modify_column_headers_item_price', 10, 2 );
 
@@ -87,6 +95,7 @@ add_filter( 'wc_customer_order_csv_export_order_headers', 'sv_wc_csv_export_modi
 function sv_wc_csv_export_order_row_one_row_per_item_price( $order_data, $item ) {
 
 	$order_data['item_price'] = wc_format_decimal( $item['price'], 2 );
+
 	return $order_data;
 }
 add_filter( 'wc_customer_order_csv_export_order_row_one_row_per_item', 'sv_wc_csv_export_order_row_one_row_per_item_price', 10, 2 );
