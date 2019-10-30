@@ -1,3 +1,5 @@
+<?php // only copy if required!
+
 function wc_memberships_hide_acf_fields( $value, $post_id, $field ) {
     
     if ( ! function_exists( 'wc_memberships' ) ) {
@@ -12,4 +14,5 @@ function wc_memberships_hide_acf_fields( $value, $post_id, $field ) {
     // return
     return $value;
 }
+
 add_filter( 'acf/format_value', 'wc_memberships_hide_acf_fields', 10, 3 );
