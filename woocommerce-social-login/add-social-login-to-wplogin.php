@@ -16,7 +16,7 @@ function sv_wc_social_login_add_buttons_wplogin() {
 		return;
 	}
 
-	// sisplays login buttons to non-logged in users and redirects users to the My Account page
+	// displays login buttons to non-logged in users and redirects users to the My Account page
 	woocommerce_social_login_buttons( wc_get_page_permalink( 'myaccount' ) );
 }
 add_action( 'login_form',    'sv_wc_social_login_add_buttons_wplogin' );
