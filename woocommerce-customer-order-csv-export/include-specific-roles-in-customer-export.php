@@ -4,6 +4,9 @@
  * Include specific roles in the customer export instead of all non-employees
  * REQUIRES WP 4.4+
  *
+ * Please note that guest customers will continue to be included in the customer
+ * export.
+ *
  * @param array $query_args the arguments for the get_users query
  * @return array
  */
