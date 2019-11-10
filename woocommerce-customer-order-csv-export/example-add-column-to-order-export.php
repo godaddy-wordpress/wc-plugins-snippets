@@ -35,7 +35,7 @@ function sv_wc_csv_export_modify_row_data_example( $order_data, $order, $csv_gen
 		'example' => $meta_key_example,
 	);
 
-	return sv_wc_csv_export_add_custom_order_data( $order_data, $custom_data );
+	return sv_wc_csv_export_add_custom_order_data( $order_data, $custom_data, $csv_generator );
 }
 add_filter( 'wc_customer_order_csv_export_order_row', 'sv_wc_csv_export_modify_row_data_example', 10, 3 );
 
