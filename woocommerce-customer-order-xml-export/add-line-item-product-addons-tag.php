@@ -5,11 +5,13 @@
  *
  * Format:
  * <OrderLineItems>
- *   <AddOn>
- *      <Name>
- *      <Value>
- *      <Price>
- *   </AddOn>
+ *   <OrderLineItem>
+ *     <AddOn>
+ *        <Name>
+ *        <Value>
+ *        <Price>
+ *     </AddOn>
+ *   </OrderLineItem>
  * </OrderLineItems>
  */
 
@@ -33,8 +35,15 @@ function sv_wc_xml_export_line_item_addons( $item_format, $order, $item ) {
 		return $item_format;
 	}
 
+	$addons = [];
+
 	// get the possible add-ons for this line item to check if they're in the order
-	$addons         = get_product_addons( $product->get_id() );
+	if ( is_callable( 'WC_Product_Addons_Helper::get_product_addons' ) ) {
+		$addons = WC_Product_Addons_Helper::get_product_addons( $product->get_id() );
+	} elseif( is_callable( 'get_product_addons' ) ) {
+		$addons = get_product_addons( $product->get_id() );
+	}
+
 	$product_addons = sv_wc_xml_export_get_line_item_addons( $item, $addons );
 
 	if ( ! empty( $product_addons ) ) {
@@ -49,7 +58,7 @@ add_filter( 'wc_customer_order_xml_export_suite_order_line_item', 'sv_wc_xml_exp
 /**
  * Gets Product Add-ons for a line item
  *
- * @param array $item line item data
+ * @param array|\WC_Order_Item $item line item data
  * @param array $addons possible addons for this line item
  * @return array - product addons ordered for the line item
  */
@@ -64,8 +73,14 @@ function sv_wc_xml_export_get_line_item_addons( $item, $addons ) {
 			return $product_addons;
 		}
 
+		if ( $item instanceof \WC_Order_Item ) {
+			$metadata = wp_list_pluck( $item->get_formatted_meta_data(), 'value', 'key' );
+		} else {
+			$metadata = $item;
+		}
+
 		// loop line item data
-		foreach ( $item as $key => $value ) {
+		foreach ( $metadata as $key => $value ) {
 
 			// check if the beginning of the meta key matches the add-on name
 			if ( $addon['name'] == substr( $key, 0, strlen( $addon['name'] ) ) ) {
