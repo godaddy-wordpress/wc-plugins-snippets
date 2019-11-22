@@ -12,14 +12,14 @@
  * @return array - the updated definition settings and fields
  */
 function sv_wc_xml_export_custom_format_settings( $definition, $export_type, $format ) {
-  
+
 	// could also check $export_type for 'orders' or 'customers'
 	if ( 'custom' === $format ) {
 		$definition['xml_version'] = '1.1';
 		$definition['xml_encoding'] = 'UTF-16';
 		// $definition['xml_standalone'] = 'yes';
 	}
-  
+
 	return $definition;
 }
-add_filter( 'wc_customer_order_xml_export_suite_format_definition', 'sv_wc_xml_export_custom_format_settings', 10, 3 );
+add_filter( 'wc_customer_order_export_xml_format_definition', 'sv_wc_xml_export_custom_format_settings', 10, 3 );

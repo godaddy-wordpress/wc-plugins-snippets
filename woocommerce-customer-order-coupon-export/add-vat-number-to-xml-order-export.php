@@ -29,7 +29,7 @@ function sv_wc_xml_export_add_vat_number_item( $format, $order ) {
 
 	return $new_format;
 }
-add_filter( 'wc_customer_order_xml_export_suite_order_data', 'sv_wc_xml_export_add_vat_number_item', 10, 2 );
+add_filter( 'wc_customer_order_export_xml_order_data', 'sv_wc_xml_export_add_vat_number_item', 10, 2 );
 
 
 /**

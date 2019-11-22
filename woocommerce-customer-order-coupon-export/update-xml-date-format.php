@@ -16,4 +16,4 @@ function sv_wc_format_xml_date_output( $date, $generator ) {
 
 	return $date;
 }
-add_filter( 'wc_customer_order_xml_export_suite_format_date', 'sv_wc_format_xml_date_output', 10, 2 );
+add_filter( 'wc_customer_order_export_xml_format_date', 'sv_wc_format_xml_date_output', 10, 2 );

@@ -9,4 +9,4 @@
 function sv_wc_customer_order_xml_export_suite_orders_xml_data_add_attributes_to_root_element( $header ) {
 	return str_replace( '<Orders>', '<Orders attributename="attributevalue">', $header );
 }
-add_filter( 'wc_customer_order_xml_export_suite_orders_header', 'sv_wc_customer_order_xml_export_suite_orders_xml_data_add_attributes_to_root_element' );
+add_filter( 'wc_customer_order_export_xml_orders_header', 'sv_wc_customer_order_xml_export_suite_orders_xml_data_add_attributes_to_root_element' );

@@ -29,4 +29,4 @@ function sv_wc_xml_export_filename_order_numbers( $variables, $ids, $export_type
 	$variables['%%order_numbers%%'] = implode( '-', $order_numbers );
 	return $variables;
 }
-add_filter( 'wc_customer_order_xml_export_suite_filename_variables', 'sv_wc_xml_export_filename_order_numbers', 10, 3 );
+add_filter( 'wc_customer_order_export_xml_filename_variables', 'sv_wc_xml_export_filename_order_numbers', 10, 3 );

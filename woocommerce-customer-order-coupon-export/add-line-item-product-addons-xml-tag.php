@@ -21,18 +21,18 @@
  *
  * REQUIRES v2.0+ of XML Export; use `wc_customer_order_xml_export_suite_order_export_line_item_format` filter for earlier versions
  *
- * @param array $item_format line item XML data to write
+ * @param array $item_data line item XML data to write
  * @param \WC_Order $order
  * @param array|\WC_Order_Item $item the line item order data or object (WC 3.0+)
  * @return array - modified line item XML data to write
  */
-function sv_wc_xml_export_line_item_addons( $item_format, $order, $item ) {
+function sv_wc_xml_export_line_item_addons( $item_data, $order, $item ) {
 
 	$product = is_callable( array( $item, 'get_product' ) ) ? $item->get_product() : $order->get_product_from_item( $item );
 
 	// bail if this line item isn't a product
 	if ( ! ( $product && $product->exists() ) ) {
-		return $item_format;
+		return $item_data;
 	}
 
 	$addons = [];
@@ -47,12 +47,12 @@ function sv_wc_xml_export_line_item_addons( $item_format, $order, $item ) {
 	$product_addons = sv_wc_xml_export_get_line_item_addons( $item, $addons );
 
 	if ( ! empty( $product_addons ) ) {
-		$item_format['AddOn'] = $product_addons;
+		$item_data['AddOn'] = $product_addons;
 	}
 
-	return $item_format;
+	return $item_data;
 }
-add_filter( 'wc_customer_order_xml_export_suite_order_line_item', 'sv_wc_xml_export_line_item_addons', 10, 3 );
+add_filter( 'wc_customer_order_export_xml_order_line_item', 'sv_wc_xml_export_line_item_addons', 10, 3 );
 
 
 /**
