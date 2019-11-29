@@ -9,6 +9,7 @@
 function sv_wc_pip_invoice_email_recipient( $recipient, $document ) {
 
 	$recipient .= ', warehouse-manager@example.com, admin@example.com';
+
 	return $recipient;
 }
 add_filter( 'woocommerce_email_recipient_pip_email_invoice', 'sv_wc_pip_invoice_email_recipient', 10, 2 );
