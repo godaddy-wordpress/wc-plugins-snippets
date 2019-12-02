@@ -56,11 +56,11 @@ function sv_wc_pip_compare_menu_order( $row_1, $row_2 ) {
 	preg_match( '/<span data-menu-order="(.*?)"><\/span>/', $row_2['menu_order'], $match );
 	$row_2_menu_order = $match[1];
 
-    if ( $row_1_menu_order === $row_2_menu_order ) {
-        return 0;
-    }
+	if ( $row_1_menu_order === $row_2_menu_order ) {
+		return 0;
+	}
 
-    return ( $row_1_menu_order < $row_2_menu_order ) ? -1 : 1;
+	return ( $row_1_menu_order < $row_2_menu_order ) ? -1 : 1;
 }
 
 
@@ -68,7 +68,7 @@ function sv_wc_pip_compare_menu_order( $row_1, $row_2 ) {
  * Hide the menu order column we've added for sorting
  */
 function sv_wc_hide_menu_order_cells() {
- 	 echo 'td.menu_order {
+	echo 'td.menu_order {
 		display:none;
 	}';
 }
