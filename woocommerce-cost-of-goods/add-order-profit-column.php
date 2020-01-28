@@ -48,6 +48,22 @@ function sv_wc_cogs_add_order_profit_column_content( $column ) {
 			// now we can cast cost since we've ensured it was calculated for the order
 			$cost   = (float) $cost;
 			$profit = $total - $cost;
+
+			if ( 'yes' === get_option( 'wc_cog_profit_report_exclude_gateway_fees' ) ) {
+
+				foreach ( $order->get_fees() as $item_id => $fee ) {
+					$profit -= (float) $fee->get_total();
+				}
+
+			}
+
+			if ( 'yes' === get_option( 'wc_cog_profit_report_exclude_taxes' ) ) {
+				$profit -= (float) $order->get_total_tax();
+			}
+
+			if ( 'yes' === get_option( 'wc_cog_profit_report_exclude_shipping_costs' ) ) {
+				$profit -= (float) $order->get_shipping_total();
+			}
 		}
 
 		echo wc_price( $profit, array( 'currency' => $currency ) );
