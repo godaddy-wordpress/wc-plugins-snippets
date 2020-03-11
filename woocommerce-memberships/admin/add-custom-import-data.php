@@ -37,7 +37,6 @@ function sv_wc_memberships_use_import_data( $user_membership, $action, $import_d
 	if ( ! $user_membership instanceof \WC_Memberships_User_Membership ) {
 		return;
 	}
-
 	
 	if ( isset( $import_data['company'] ) ) {
 		
@@ -55,9 +54,6 @@ function sv_wc_memberships_use_import_data( $user_membership, $action, $import_d
 			delete_post_meta( $user_membership->get_id(), '_member_company' );
 		}		
 	}
-	
-	// optional: delete existing data if received import is empty
-	if ( 'merge' === $action 
 	
 	// optional: migrate data stored elsewhere into the membership (a user meta associated to the user of this membership, for example)
 	if ( $user_phone = get_user_meta( $user_membership->get_id(), '_user_phone', true ) ) {
