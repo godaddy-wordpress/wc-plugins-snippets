@@ -39,14 +39,25 @@ function sv_wc_memberships_use_import_data( $user_membership, $action, $import_d
 	}
 
 	
-	if ( ! empty( $import_data['company'] ) && is_string( $import_data['company'] ) ) {
+	if ( isset( $import_data['company'] ) ) {
 		
-		// imports the data passed from wc_memberships_csv_import_user_memberships_data filter as a membership note, in this example...
-		$user_membership->add_note( sprintf( __( 'Member imported for company %s.', 'my-textdomain' ), $import_data['company'] ) );
+		if ( ! empty( $import_data['company'] ) && is_string( $import_data['company'] ) {
+			
+			// imports the data passed from wc_memberships_csv_import_user_memberships_data filter as a membership note, in this example...
+			$user_membership->add_note( sprintf( __( 'Member imported for company %s.', 'my-textdomain' ), $import_data['company'] ) );
 		
-		// ...but you can also set a custom meta data on the membership itself, perhaps if you intend to use it in further customizations
-		update_post_meta( $user_membership->get_id(), '_member_company', $import_data['company'] );
+			// ...but you can also set a custom meta data on the membership itself, perhaps if you intend to use it in further customizations
+			update_post_meta( $user_membership->get_id(), '_member_company', $import_data['company'] );
+			
+		} elseif ( 'merge' === $action ) {
+			
+			// you can also use the current callback to delete existing data on the membership, if necessary
+			delete_post_meta( $user_membership->get_id(), '_member_company' );
+		}		
 	}
+	
+	// optional: delete existing data if received import is empty
+	if ( 'merge' === $action 
 	
 	// optional: migrate data stored elsewhere into the membership (a user meta associated to the user of this membership, for example)
 	if ( $user_phone = get_user_meta( $user_membership->get_id(), '_user_phone', true ) ) {
