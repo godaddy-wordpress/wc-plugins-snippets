@@ -11,10 +11,35 @@ function sv_wc_pdf_product_vouchers_complete_order_when_redeemed( $voucher, $old
 
 	if ( 'redeemed' === $new_status ) {
 
-		$order_note = esc_html__( 'Voucher has been redeemed.', 'my-text-domain' );
+		$order = $voucher->get_order();
+		
+		if ( $order ) {
 
-		if ( $order = $voucher->get_order() ) {
-			$order->update_status( 'completed', $order_note );
+			$complete_order = true;
+
+			// optional: this will check if the order contains additional unredeemed vouchers
+			if ( class_exists( 'WC_PDF_Product_Vouchers_Order', false ) ) {
+
+				foreach ( \WC_PDF_Product_Vouchers_Order::get_vouchers( $order ) as $additional_voucher ) {
+
+					if ( $voucher->get_id() === $additional_voucher->get_id() ) {
+						continue;
+					}
+
+					if ( ! $additional_voucher->has_status( 'redeemed' ) ) {
+
+						$complete_order = false;
+						break;
+					}
+				}
+			}
+
+			if ( $complete_order ) {
+
+				$order_note = esc_html__( 'Voucher has been redeemed.', 'my-text-domain' );
+
+				$order->update_status( 'completed', $order_note );
+			}
 		}
 	}
 }
