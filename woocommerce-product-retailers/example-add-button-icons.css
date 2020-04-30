@@ -1,7 +1,7 @@
 /*---------------------------------------
 WooCommerce Product Retailers adjustments
 
-Changes WooCommerce Product Retailers buttons 
+Changes WooCommerce Product Retailers buttons
 (Note: this example relies on FontAwesome being loaded already)
 ---------------------------------------*/
 .wc-product-retailers-wrap > p {
@@ -12,17 +12,17 @@ Changes WooCommerce Product Retailers buttons
 }
 
 /* change opacity of all buttons on hover */
-ul.wc-product-retailers a.button.alt:hover {
+.wc-product-retailers-wrap .wc-product-retailers a.button.alt:hover {
 	opacity: 0.9;
 }
 
 /* Add Amazon colors / FontAwesome icon */
-ul.wc-product-retailers a.button.alt.wc-product-retailer-amazon {
+.wc-product-retailers-wrap .wc-product-retailers a.button.alt.wc-product-retailer-amazon {
 	background-color: #f3a847;
 	padding-left: 10px;
 }
 
-a.wc-product-retailer-amazon:before {
+.wc-product-retailers-wrap a.wc-product-retailer-amazon:before {
 	font-family: 'FontAwesome';
 	font-weight: normal;
 	font-style: normal;
@@ -33,12 +33,12 @@ a.wc-product-retailer-amazon:before {
 }
 
 /* Add Apple colors / FontAwesome icon */
-ul.wc-product-retailers a.button.alt.wc-product-retailer-apple {
+.wc-product-retailers-wrap .wc-product-retailers a.button.alt.wc-product-retailer-apple {
 	background-color: #333;
 	padding-left: 10px;
 }
 
-a.wc-product-retailer-apple:before {
+.wc-product-retailers-wrap a.wc-product-retailer-apple:before {
 	font-family: 'FontAwesome';
 	font-weight: normal;
 	font-style: normal;
