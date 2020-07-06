@@ -13,13 +13,8 @@
  */
 function sv_wc_twilio_sms_variable_replacement( $message, $order ) {
 
-	// if we bail here, you need to upgrade your Twilio plugin
-	if ( ! class_exists( 'SV_WC_Order_Compatibility' ) ) {
-		return $message;
-	}
-
 	// Shipment tracking: use first package
-	$tracking_data     = SV_WC_Order_Compatibility::get_meta( $order, '_wc_shipment_tracking_items' );
+	$tracking_data     = $order->get_meta( '_wc_shipment_tracking_items', true );
 	$tracking_provider = $tracking_data[0]['tracking_provider'];
 	$tracking_number   = $tracking_data[0]['tracking_number'];
 
@@ -30,7 +25,7 @@ function sv_wc_twilio_sms_variable_replacement( $message, $order ) {
 	$message = str_replace( '%order_id%', $order->get_order_number(), $message );
 
 	// Customer first name
-	$message = str_replace( '%first_name%', SV_WC_Order_Compatibility::get_prop( $order, 'billing_first_name' ), $message );
+	$message = str_replace( '%first_name%', $order->get_billing_first_name(), $message );
 
 	return $message;
 }
