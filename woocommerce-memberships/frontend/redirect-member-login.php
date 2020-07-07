@@ -2,7 +2,12 @@
 
 
 /**
- * Redirects a member to the shop when logging in rather than the account.
+ * Redirects a member of a specific membership plan to the shop when logging in
+ * rather than the account.
+ *
+ * Note: As of Memberships v1.16.0, you can set the global redirect page directly
+ * in the plugin's settings but the following code snippet would still need to be
+ * used to set the URL for members of specific membership plans.
  *
  * @param string $redirect link to direct user to
  * @param \WP_User $user the user logging in
