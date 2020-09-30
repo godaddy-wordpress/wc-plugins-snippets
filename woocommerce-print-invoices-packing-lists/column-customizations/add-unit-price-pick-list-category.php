@@ -1,3 +1,5 @@
+<?php // only copy this line if needed
+
 /**
  * Filter the document table headers to add custom column headers
  *
