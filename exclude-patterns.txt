@@ -1,0 +1,29 @@
+resources/js/app.js
+resources/vendor
+(.*/)?autoload.php
+sample.env
+# Library Folders
+node_modules
+(.*/)?node_modules/
+vendor
+(.*/)?vendor/
+# Lock Files are not always in the root
+.*composer.lock
+.*package.json
+.*package-lock.json
+.pnp.js
+.*Pipfile.lock
+.*yarn.lock
+# Ignore inline images
+.*\.css$
+.*\.scss$
+.*\.ico$
+.*\.jpg$
+.*\.png$
+.*\.svg$
+# Ignore uploaded logs
+.*\.log$
+# Frontend Build Files
+build
+data
+public/js/app.js
