@@ -1,4 +1,4 @@
-<?php // only copy if neede
+<?php // only copy if needed
 
 
 /**
