@@ -14,9 +14,9 @@ function sv_wc_pip_document_table_footer( $rows, $type, $order_id ) {
     if ( 'invoice' !== $type ) { return $rows; }
 
     //remove payment method from array
-    if ($rows['payment_method'] !== false) {
-        unset($rows['payment_method']);
-    }
+	if ( isset( $rows['payment_method'] ) ) {
+		unset( $rows['payment_method'] );
+	}
 
     return $rows; //return updated array
 }
