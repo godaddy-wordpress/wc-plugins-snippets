@@ -14,9 +14,9 @@ function sv_wc_pip_document_table_footer( $rows, $type, $order_id ) {
     if ( 'invoice' !== $type ) { return $rows; }
 
     //remove subtotal from array
-    if ($rows['cart_subtotal'] !== false) {
-        unset($rows['cart_subtotal']);
-    }
+	if ( isset( $rows['cart_subtotal'] ) ) {
+		unset( $rows['cart_subtotal'] );
+	}
 
     return $rows; //return updated array
 }
