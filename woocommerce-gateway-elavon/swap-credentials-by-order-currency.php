@@ -10,7 +10,9 @@
  */
 function sv_wc_elavon_swap_auth_data( $request_data, $request ) {
 
-	if ( $request->get_order() instanceof WC_Order && $request->get_order()->get_currency() ) {
+	$auth_data = [];
+	
+	if ( is_callable( [ $request, 'get_order' ] ) && $request->get_order() instanceof WC_Order && $request->get_order()->get_currency() ) {
 
 		switch ( $request->get_order()->get_currency() ) {
 
