@@ -9,5 +9,5 @@ if ( wc_memberships_is_post_content_restricted( get_the_id() ) ) {
     // the user is a member who can view this content
   } else {
     // the user cannot view this content right now
-	}
+  }
 }
