@@ -8,7 +8,8 @@ function sv_memberships_unhook_members_area() {
 	if ( ! is_admin() && function_exists( 'wc_memberships' ) ) {
 
 		$frontend     = wc_memberships()->get_frontend_instance();
-		$members_area = $frontend ? $frontend->get_members_area_instance() : null;
+ 		// $members_area = $frontend ? $frontend->get_members_area_instance() : null;
+		$members_area = $frontend ? $frontend->get_my_account_instance()->get_members_area_instance() : null;
 
 		if ( $members_area ) {
 			remove_filter( 'woocommerce_account_menu_items', array( $members_area, 'add_account_members_area_menu_item' ), 999 );
