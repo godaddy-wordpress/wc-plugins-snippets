@@ -14,11 +14,11 @@ function sv_wc_csv_export_reorder_customer_columns( $column_headers ) {
 	// remove customer_id from the original set of column headers, otherwise it will be duplicated
 	unset( $column_headers['customer_id'] );
 
-	$new_column_headers = array();
+	$new_column_headers = [];
 
 	foreach ( $column_headers as $key => $name ) {
 
-		$new_column_headers[ $key ] = $name;
+		$new_column_headers[$key] = $name;
 
 		if ( 'last_name' == $key ) {
 			// re-add customer_id immediately after last_name
