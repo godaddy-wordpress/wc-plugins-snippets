@@ -13,11 +13,11 @@ function sv_wc_csv_export_reorder_columns( $column_headers ) {
 	// remove order total from the original set of column headers, otherwise it will be duplicated
 	unset( $column_headers['order_total'] );
 
-	$new_column_headers = array();
+	$new_column_headers = [];
 
 	foreach ( $column_headers as $column_key => $column_name ) {
 
-		$new_column_headers[ $column_key ] = $column_name;
+		$new_column_headers[$column_key] = $column_name;
 
 		if ( 'order_number' == $column_key ) {
 
