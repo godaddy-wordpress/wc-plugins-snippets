@@ -18,7 +18,7 @@ function sv_wc_csv_export_reorder_customer_columns( $column_headers ) {
 
 	foreach ( $column_headers as $key => $name ) {
 
-		$new_column_headers[$key] = $name;
+		$new_column_headers[ $key ] = $name;
 
 		if ( 'last_name' == $key ) {
 			// re-add customer_id immediately after last_name

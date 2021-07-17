@@ -52,7 +52,9 @@ function sv_wc_csv_export_add_coupon_codes_data( $order_data, $order, $csv_gener
 		$coupons[] = sanitize_text_field( $coupon['name'] );
 	}
 
-	$custom_data = ['coupon_codes' => implode( '|', $coupons ),];
+	$custom_data = [
+		'coupon_codes' => implode( '|', $coupons ),
+	];
 
 	if ( version_compare( wc_customer_order_csv_export()->get_version(), '4.0.0', '<' ) ) {
 		$one_row_per_item = ( 'default_one_row_per_item' === $csv_generator->order_format || 'legacy_one_row_per_item' === $csv_generator->order_format );
