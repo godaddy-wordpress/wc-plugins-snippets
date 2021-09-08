@@ -1,17 +1,3 @@
-# release-template
-
-* MUST include the following information:
-
-    * Original author
-    * Description of project
-    * Description of how to use/deploy project, or link to document with the same
-
-  * This SHOULD also contain:
-
-    * A link to the [GoDaddy-OSS Slack server][13]
-
-Add your project description HERE!
-
 # SkyVerge WooCommerce Plugins
 
 Welcome to the `wc-plugins-snippets` repository! This repository stores code snippets related to [SkyVerge WooCommerce plugins](https://www.skyverge.com/shop/) to modify or add onto plugin behavior.
@@ -21,6 +7,11 @@ Code snippets are organized by plugin (folder), and each plugin's folder include
 Some larger plugins, such as Memberships, may have sub-folders by category / snippet type to make it easier to find relevant snippets.
 
 **Please ensure you know how to [add custom code to your website](https://www.skyverge.com/blog/add-custom-code-to-wordpress/) if you use any of these code snippets**. These are provided publicly as a courtesy, and are **not supported**, so you should be familiar with adding code to your site to use them.
+
+**Please Note:** GitHub is for bug reports and contributions primarily -
+if you have a support question head over to [GoDaddy's Open Source
+Software Slack channel][slack]. You can request an invite
+[here][invite].
 
 ## Issues and Contributions
 
