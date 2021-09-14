@@ -9,19 +9,6 @@ No matter how you want to get involved, we ask that you first learn what’s
 expected of anyone who participates in the project by reading the Contribution
 Guidelines and our [Code of Conduct][coc].
 
-**Please Note:** GitHub is for bug reports and contributions primarily -
-if you have a support question head over to [GoDaddy's Open Source
-Software Slack channel][slack]. You can request an invite
-[here][invite].
-
-## Answering Questions
-
-One of the most important and immediate ways you can support this project is
-to answer questions on [Slack][slack] or [Github][issues]. Whether you’re
-helping a newcomer understand a feature or troubleshooting an edge case with a
-seasoned developer, your knowledge and experience with a programming language
-can go a long way to help others.
-
 ## Reporting Bugs
 
 **Do not report potential security vulnerabilities here. Refer to
@@ -76,6 +63,24 @@ contributors about the change, discuss the best way to go about implementing it.
 >   branch to use the upstream master branch whenever you run git pull. Then you
 >   can make all of your pull request branches based on this master branch.
 >   Whenever you want to update your version of master, do a regular git pull.
+
+**PR Guidelines**
+
+ - Please ensure that your PR follows WordPress coding standards and conventions.
+
+ - All snippets should be PHP 5.3-compatible and use best WooCommerce practices. Try to maintain compatibility at least as far back as WooCommerce 2.6.x, or otherwise note requirements in the snippet.
+
+ - Please use "poor man's namespacing" for function names by using this format:
+
+ ```
+ function sv_wc_{plugin_name}_my_function() {
+    // the function code
+ }
+ ```
+
+ - Files should include one "snippet" or example per file.
+
+ - If your snippet relates to multiple plugins, put it in both folders so it's easy to find.
 
 ## Code Review
 
