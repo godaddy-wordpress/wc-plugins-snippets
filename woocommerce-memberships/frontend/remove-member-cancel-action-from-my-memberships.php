@@ -7,9 +7,11 @@
  * @param array $actions the array of membership action links
  * @return array $actions the updated array of actions
  */
-function sv_edit_my_memberships_actions( $actions ) {
 
+ function sv_edit_my_memberships_actions( $actions ) {
+    
 	unset( $actions['cancel'] );
+    
 	return $actions;
 }
-add_filter( 'wc_memberships_members_area_my-memberships_actions', 'sv_edit_my_memberships_actions' );
+add_filter( 'wc_memberships_members_area_my-membership-details_actions', 'sv_edit_my_memberships_actions' );
