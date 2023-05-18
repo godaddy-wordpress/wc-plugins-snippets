@@ -8,7 +8,7 @@
  * @param string $document_type        The type of document being viewed
  * @return string                      The filtered sort column key
  */
-function sv_wc_pip_document_sort_order_items_by_sku( $sort_by, $order_id, $type ) {
+function sv_wc_pip_document_sort_order_items_by_sku( $sort_by, $order_id, $document_type ) {
 
 	// uncomment if you want to only change the sort key for packing lists
 	// if ( 'packing-list' !== $document_type ) { return; }
