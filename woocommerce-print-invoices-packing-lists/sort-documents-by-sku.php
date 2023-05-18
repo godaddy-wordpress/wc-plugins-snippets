@@ -1,7 +1,7 @@
 <?php // only copy this line if needed
 
 /**
- * Change the Print Invoices/Packing Lists order items sort column key to SKU
+ * Change the Print Invoices/Pick Lists order items sort column key to SKU
  *
  * @param string $sort_order_items_key The column key (such as 'sku', 'price', 'weight', etc.) to sort order items by
  * @param int $order_id                The WC_Order id
@@ -10,8 +10,8 @@
  */
 function sv_wc_pip_document_sort_order_items_by_sku( $sort_by, $order_id, $type ) {
 
-	// uncomment if you want to only change the sort key for packing lists
-	// if ( 'packing-list' !== $document_type ) { return; }
+	// uncomment if you want to only change the sort key for pick lists
+	// if ( 'pick-list' !== $document_type ) { return; }
 
 	return 'sku';
 }
