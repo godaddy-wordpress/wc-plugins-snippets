@@ -17,15 +17,11 @@ function sv_wc_add_membership_expiration_email_recipients( $recipient, $membersh
 
 	// use a comma-sep list as it will turn into an array after this filter
 	$recipient .= ',admin@mystore.com, manager@mystore.com';
-
 	return $recipient;
 }
-
 // add recipients to the "Ending Soon" email
 add_filter( 'woocommerce_email_recipient_WC_Memberships_User_Membership_Ending_Soon_Email', 'sv_wc_add_membership_expiration_email_recipients', 10, 2 );
-
 // add these recipients to the "Membership Ended" email
 add_filter( 'woocommerce_email_recipient_WC_Memberships_User_Membership_Ended_Email', 'sv_wc_add_membership_expiration_email_recipients', 10, 2 );
-
 // add these recipients to the "Renewal Reminder" email
 add_filter( 'woocommerce_email_recipient_WC_Memberships_User_Membership_Renewal_Reminder_Email', 'sv_wc_add_membership_expiration_email_recipients', 10, 2 );
