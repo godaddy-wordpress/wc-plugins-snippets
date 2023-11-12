@@ -17,7 +17,7 @@
  */
 function sv_wc_csv_export_order_line_item_price( $line_item, $item, $product ) {
 
-	$new_line_item = array();
+	$new_line_item = [];
 
 	foreach ( $line_item as $key => $data ) {
 
@@ -61,7 +61,7 @@ function sv_wc_csv_export_modify_column_headers_item_price( $column_headers, $cs
 		// add after 'item_sku' column if it exists
 		if ( isset( $column_headers['item_sku'] ) ) {
 
-			$new_headers = array();
+			$new_headers = [];
 
 			foreach ( $column_headers as $key => $column ) {
 
