@@ -11,8 +11,9 @@
 function sv_wc_csv_export_order_line_item_sku( $line_item, $item, $product ) {
 
 	if ( $product->is_type( 'variation' ) ) {
-		// pre / post WC 3.0 compat
-		$sku = is_callable( array( $product, 'get_parent_id' ) ) ? wc_get_product( $product->get_parent_id() )->get_sku() : $product->parent->get_sku();
+
+		$sku = wc_get_product( $product->get_parent_id() )->get_sku();
+		
 		$line_item['sku'] = $sku;
 	}
 

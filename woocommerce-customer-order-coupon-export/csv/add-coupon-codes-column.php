@@ -17,7 +17,7 @@
  */
 function sv_wc_csv_export_add_coupon_codes_column( $column_headers, $csv_generator ) {
 
-	$new_columns = array();
+	$new_columns = [];
 
 	foreach ( $column_headers as $id => $header )  {
 
@@ -43,18 +43,16 @@ add_filter( 'wc_customer_order_export_csv_order_headers', 'sv_wc_csv_export_add_
  */
 function sv_wc_csv_export_add_coupon_codes_data( $order_data, $order, $csv_generator ) {
 
-	$new_order_data   = array();
+	$new_order_data   = [];
 	$one_row_per_item = false;
-	$coupons          = array();
+	$coupons          = [];
 	$coupon_lines     = $order->get_items( 'coupon' );
 
 	foreach( $coupon_lines as $coupon ) {
 		$coupons[] = sanitize_text_field( $coupon['name'] );
 	}
 
-	$custom_data = array(
-		'coupon_codes' => implode( '|', $coupons ),
-	);
+	$custom_data = ['coupon_codes' => implode( '|', $coupons ),];
 
 	if ( version_compare( wc_customer_order_csv_export()->get_version(), '4.0.0', '<' ) ) {
 		$one_row_per_item = ( 'default_one_row_per_item' === $csv_generator->order_format || 'legacy_one_row_per_item' === $csv_generator->order_format );
