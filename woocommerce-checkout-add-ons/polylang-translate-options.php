@@ -13,22 +13,23 @@
  */
 function sv_wc_coa_register_polylang_strings() {
 
-	if ( function_exists( 'wc_checkout_add_ons' ) && function_exists( 'pll_register_string' ) ) {
+	if ( class_exists( 'SkyVerge\WooCommerce\Checkout_Add_Ons\Add_Ons\Add_On_Factory' ) && function_exists( 'pll_register_string' ) ) {
 
-		$add_ons = wc_checkout_add_ons()->get_add_ons();
+		$add_ons = SkyVerge\WooCommerce\Checkout_Add_Ons\Add_Ons\Add_On_Factory::get_add_ons() ;
 
 		foreach ( $add_ons as $id => $add_on ) {
 
-			$add_on_label = ! empty( $add_on->label ) ? $add_on->label : $add_on->name;
-			pll_register_string( $add_on->name, $add_on_label, 'woocommerce-checkout-add-ons' );
-
+			$add_on_label = ! empty( $add_on->get_label() ) ? $add_on->get_label() : $add_on->get_name();
+			pll_register_string( 'checkout_add_on_label: ' . $add_on->get_name(), $add_on_label, 'woocommerce-checkout-add-ons' );
+			
 			// if the add-on has options, register these option labels, too
 			if ( $add_on->has_options() ) {
 
-				$options = $add_on->get_options( false );
+				$options = $add_on->get_options( 'edit' );
 
 				foreach ( $options as $option ) {
-					pll_register_string( $option['value'], $option['label'], 'woocommerce-checkout-add-ons' );
+					
+					pll_register_string( 'checkout_add_on_option', $option['label'], 'woocommerce-checkout-add-ons' );
 				}
 			}
 		}
@@ -44,15 +45,10 @@ add_action( 'init', 'sv_wc_coa_register_polylang_strings' );
  * @return string translated label
  */
 function sv_wc_coa_polylang_translate_labels( $label ) {
-
-	if ( function_exists( 'pll__' ) ) {
-		$label = pll__( $label );
-	}
-
-	return $label;
+	return  function_exists( 'pll__' ) ? pll__( $label ) : $label;
 }
-add_filter( 'wc_checkout_add_ons_add_on_label', 'sv_wc_coa_polylang_translate_labels' );
-add_filter( 'wc_checkout_add_ons_add_on_name',  'sv_wc_coa_polylang_translate_labels' );
+add_filter( 'woocommerce_checkout_add_on_get_label', 'sv_wc_coa_polylang_translate_labels' );
+add_filter( 'woocommerce_checkout_add_on_get_name',  'sv_wc_coa_polylang_translate_labels' );
 
 
 /**
@@ -75,4 +71,4 @@ function sv_wc_coa_polylang_translate_options( $options ) {
 
 	return ! empty( $translated_options ) ? $translated_options : $options;
 }
-add_filter( 'wc_checkout_add_ons_options', 'sv_wc_coa_polylang_translate_options' );
+add_filter( 'woocommerce_checkout_add_on_get_options', 'sv_wc_coa_polylang_translate_options' );

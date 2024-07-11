@@ -8,7 +8,7 @@
  * @return array $rows the updated array
  */
 
-function sv_wc_pip_document_table_footer( $rows, $type, $order_id ) {
+function sv_wc_pip_document_table_footer( $rows, $type, $order ) {
     
     //bail if document type is not invoice
     if ( 'invoice' !== $type ) { return $rows; }
